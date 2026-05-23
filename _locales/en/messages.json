@@ -1,0 +1,468 @@
+{
+  "extDescription": {
+    "message": "Smart tab manager with one-click save, search, workspaces and optional cross-device sync.",
+    "description": "Extension description shown in Chrome Web Store and chrome://extensions"
+  },
+  "extName": {
+    "message": "TabMod",
+    "description": "Extension name"
+  },
+
+  "cmdSaveAll": {
+    "message": "Save all tabs",
+    "description": "Keyboard shortcut: save all open tabs"
+  },
+  "cmdSaveCurrent": {
+    "message": "Save current tab",
+    "description": "Keyboard shortcut: save the active tab"
+  },
+  "cmdOpenPopup": {
+    "message": "Open TabMod popup",
+    "description": "Keyboard shortcut: open the extension popup"
+  },
+
+  "contextSaveCurrent": {
+    "message": "Save this tab to TabMod",
+    "description": "Right-click menu: save the current page as a tab"
+  },
+  "contextSaveAll": {
+    "message": "Save all tabs to TabMod",
+    "description": "Right-click menu: save all tabs in the current window"
+  },
+  "contextSaveRight": {
+    "message": "Save tabs to the right",
+    "description": "Right-click menu: save all tabs to the right of the current one"
+  },
+
+  "popupTitle": {
+    "message": "TabMod",
+    "description": "Popup window header title"
+  },
+  "searchPlaceholder": {
+    "message": "Search tabs…",
+    "description": "Placeholder text in the search input"
+  },
+  "saveAllButton": {
+    "message": "Save All",
+    "description": "Button to save all open tabs"
+  },
+  "restoreButton": {
+    "message": "Restore",
+    "description": "Button to restore a single tab"
+  },
+  "restoreAllButton": {
+    "message": "Restore All",
+    "description": "Button to restore all tabs in a workspace"
+  },
+  "deleteButton": {
+    "message": "Delete",
+    "description": "Button to delete a tab"
+  },
+  "moreButton": {
+    "message": "More",
+    "description": "More options button (context menu trigger)"
+  },
+  "cancelButton": {
+    "message": "Cancel",
+    "description": "Cancel action button"
+  },
+  "confirmButton": {
+    "message": "Confirm",
+    "description": "Confirm action button"
+  },
+  "closeButton": {
+    "message": "Close",
+    "description": "Close dialog button"
+  },
+
+  "tabSaved_one": {
+    "message": "1 tab saved",
+    "description": "Singular: notification after saving one tab"
+  },
+  "tabSaved_other": {
+    "message": "$1 tabs saved",
+    "description": "Plural: notification after saving multiple tabs"
+  },
+  "tabRestored_one": {
+    "message": "1 tab restored",
+    "description": "Singular: notification after restoring one tab"
+  },
+  "tabRestored_other": {
+    "message": "$1 tabs restored",
+    "description": "Plural: notification after restoring multiple tabs"
+  },
+  "tabDeleted_one": {
+    "message": "1 tab deleted",
+    "description": "Singular: notification after deleting one tab"
+  },
+  "tabDeleted_other": {
+    "message": "$1 tabs deleted",
+    "description": "Plural: notification after deleting multiple tabs"
+  },
+  "undoButton": {
+    "message": "Undo",
+    "description": "Undo button text in toast notification"
+  },
+  "restoreProgress": {
+    "message": "Restoring $1 of $2…",
+    "description": "Progress message while restoring tabs in batches"
+  },
+  "restoreComplete": {
+    "message": "Restored $1 tabs",
+    "description": "Notification when batch restore completes"
+  },
+
+  "workspaceAll": {
+    "message": "All",
+    "description": "Tab label showing all workspaces combined"
+  },
+  "workspaceNew": {
+    "message": "New Workspace",
+    "description": "Button to create a new workspace"
+  },
+  "workspaceDefault": {
+    "message": "General",
+    "description": "Default workspace name when none is specified"
+  },
+  "workspaceRename": {
+    "message": "Rename",
+    "description": "Rename workspace action"
+  },
+  "workspaceDelete": {
+    "message": "Delete workspace",
+    "description": "Delete workspace action"
+  },
+  "workspaceDeleteConfirm": {
+    "message": "Delete this workspace and all its tabs?",
+    "description": "Confirmation dialog when deleting a workspace"
+  },
+  "workspaceEmpty": {
+    "message": "No tabs in this workspace yet.",
+    "description": "Empty state when a workspace has no saved tabs"
+  },
+  "workspaceCount": {
+    "message": "$1 tabs",
+    "description": "Label showing tab count in a workspace"
+  },
+
+  "langChanged": {
+    "message": "Language changed. Close and reopen the popup.",
+    "description": "Toast shown when language is changed"
+  },
+  "noNewTabs": {
+    "message": "No new tabs found. All already saved.",
+    "description": "Notification when save-all finds only duplicates"
+  },
+  "emptyStateTitle": {
+    "message": "No saved tabs yet",
+    "description": "Title shown when no tabs have been saved"
+  },
+  "emptyStateDesc": {
+    "message": "Click the button below or press Alt+Shift+A to save all open tabs.",
+    "description": "Description shown in the empty state"
+  },
+  "emptyStateCTA": {
+    "message": "Save All Open Tabs",
+    "description": "Call-to-action button inside the empty state"
+  },
+  "autoSaveEnabled": {
+    "message": "Auto-save",
+    "description": "Settings toggle: enable automatic periodic saving"
+  },
+  "autoSaveInterval": {
+    "message": "Auto-save interval",
+    "description": "Settings label for auto-save frequency"
+  },
+  "autoSaveEvery5": {
+    "message": "Every 5 minutes",
+    "description": "Auto-save interval option"
+  },
+  "autoSaveEvery15": {
+    "message": "Every 15 minutes",
+    "description": "Auto-save interval option"
+  },
+  "autoSaveEvery30": {
+    "message": "Every 30 minutes",
+    "description": "Auto-save interval option"
+  },
+
+  "settingsTitle": {
+    "message": "Settings",
+    "description": "Settings panel title"
+  },
+  "settingsAppearance": {
+    "message": "Appearance",
+    "description": "Settings section: visual appearance"
+  },
+  "settingsTheme": {
+    "message": "Theme",
+    "description": "Settings: theme selection"
+  },
+  "themeLight": {
+    "message": "Light",
+    "description": "Light theme option"
+  },
+  "themeDark": {
+    "message": "Dark",
+    "description": "Dark theme option"
+  },
+  "themeSystem": {
+    "message": "System",
+    "description": "Follow system theme option"
+  },
+  "settingsLanguage": {
+    "message": "Language",
+    "description": "Settings: language selection"
+  },
+  "settingsData": {
+    "message": "Data",
+    "description": "Settings section: data management"
+  },
+  "settingsExport": {
+    "message": "Export all data",
+    "description": "Button: export all saved tabs"
+  },
+  "settingsExportJSON": {
+    "message": "Export as JSON",
+    "description": "Export format option"
+  },
+  "settingsExportMD": {
+    "message": "Export as Markdown",
+    "description": "Export format option"
+  },
+  "settingsExportBookmarks": {
+    "message": "Export as HTML bookmarks",
+    "description": "Export format option"
+  },
+  "settingsExportSuccess": {
+    "message": "Data exported successfully",
+    "description": "Success notification after export"
+  },
+  "settingsClearAll": {
+    "message": "Clear all data",
+    "description": "Button: clear all local storage data"
+  },
+  "settingsClearAllConfirm": {
+    "message": "This will permanently delete all saved tabs and workspaces. This action cannot be undone.",
+    "description": "Confirmation dialog when clearing all data"
+  },
+  "settingsPro": {
+    "message": "Upgrade to Pro",
+    "description": "Button or section for Pro upgrade"
+  },
+  "settingsAbout": {
+    "message": "About",
+    "description": "Settings section: about the extension"
+  },
+  "settingsVersion": {
+    "message": "Version",
+    "description": "Label showing extension version"
+  },
+  "settingsFeedback": {
+    "message": "Send feedback",
+    "description": "Link to submit feedback"
+  },
+  "settingsPrivacy": {
+    "message": "Privacy policy",
+    "description": "Link to privacy policy"
+  },
+
+  "statsTitle": {
+    "message": "Statistics",
+    "description": "Statistics panel title"
+  },
+  "statsTabsSaved": {
+    "message": "Tabs saved",
+    "description": "Statistic: total number of tabs saved"
+  },
+  "statsTabsRestored": {
+    "message": "Tabs restored",
+    "description": "Statistic: total number of tabs restored"
+  },
+  "statsMemorySaved": {
+    "message": "Memory saved",
+    "description": "Statistic: estimated memory saved"
+  },
+
+  "exportTitle": {
+    "message": "Export",
+    "description": "Export panel title"
+  },
+  "exportFormat": {
+    "message": "Format",
+    "description": "Label for export format selection"
+  },
+
+  "proUpgradeTitle": {
+    "message": "Upgrade to Pro",
+    "description": "Upgrade page title"
+  },
+  "proFeatureSync": {
+    "message": "Cloud sync across devices",
+    "description": "Pro feature: cross-device synchronization"
+  },
+  "proFeatureUnlimited": {
+    "message": "Unlimited tab lists and workspaces",
+    "description": "Pro feature: no storage limits"
+  },
+  "proFeatureSnooze": {
+    "message": "Tab snoozing to save memory",
+    "description": "Pro feature: tab suspension"
+  },
+  "proFeatureAI": {
+    "message": "AI auto-classification",
+    "description": "Pro feature: automatic tab categorization"
+  },
+  "proFeatureShortcuts": {
+    "message": "Custom keyboard shortcuts",
+    "description": "Pro feature: customizable hotkeys"
+  },
+  "proFeaturePriority": {
+    "message": "Priority email support",
+    "description": "Pro feature: faster support responses"
+  },
+  "proPriceMonthly": {
+    "message": "$3.99/month",
+    "description": "Pro monthly subscription price"
+  },
+  "proPriceYearly": {
+    "message": "$29.99/year",
+    "description": "Pro yearly subscription price"
+  },
+  "proPriceLifetime": {
+    "message": "$79.99 lifetime",
+    "description": "Pro lifetime purchase price"
+  },
+  "proSavings": {
+    "message": "Save 37%",
+    "description": "Savings badge for yearly plan"
+  },
+  "proUpgradeNow": {
+    "message": "Upgrade Now",
+    "description": "Upgrade CTA button"
+  },
+  "proLater": {
+    "message": "Maybe later",
+    "description": "Dismiss upgrade prompt"
+  },
+  "proLicensePlaceholder": {
+    "message": "Enter License Key…",
+    "description": "License key input placeholder"
+  },
+  "proActivate": {
+    "message": "Activate",
+    "description": "Activate license button"
+  },
+  "proAlreadyHave": {
+    "message": "Already have a License Key? Activate →",
+    "description": "Link to enter an existing license key"
+  },
+  "proTabsLimit": {
+    "message": "You've used $1 of $2 tab lists. Upgrade to Pro for unlimited storage.",
+    "description": "Upgrade prompt when approaching the free limit"
+  },
+  "proTabsLimitReached": {
+    "message": "You've reached the free limit of $1 tab lists. Upgrade to Pro to continue saving.",
+    "description": "Upgrade prompt when free limit is reached"
+  },
+
+  "errorGeneric": {
+    "message": "Something went wrong. Please try again.",
+    "description": "Generic error message"
+  },
+  "errorSWDead": {
+    "message": "Extension encountered an error. Please refresh or restart from chrome://extensions.",
+    "description": "Error when Service Worker is unavailable"
+  },
+  "errorStorageFull": {
+    "message": "Storage is nearly full. Please export and clear old data.",
+    "description": "Error when chrome.storage is near capacity"
+  },
+  "errorSyncFailed": {
+    "message": "Sync failed. Will retry automatically.",
+    "description": "Error when cloud sync fails"
+  },
+  "errorNetwork": {
+    "message": "Network unavailable. Changes saved locally.",
+    "description": "Error when network is offline during sync"
+
+  },
+  "statusSyncing": {
+    "message": "Syncing…",
+    "description": "Status indicator during sync"
+  },
+  "statusSyncSuccess": {
+    "message": "Synced",
+    "description": "Status indicator when sync completed"
+  },
+  "statusSaving": {
+    "message": "Saving…",
+    "description": "Status indicator while saving"
+  },
+  "statusLoading": {
+    "message": "Loading…",
+    "description": "Status indicator while loading data"
+  },
+
+  "crashRecoveryTitle": {
+    "message": "Crash Recovery",
+    "description": "Title for crash recovery notification"
+  },
+  "crashRecoveryDesc": {
+    "message": "Chrome closed unexpectedly. Your tabs have been auto-saved.",
+    "description": "Description shown after a Chrome crash"
+  },
+  "crashRecoveryWorkspace": {
+    "message": "Recovered ($1)",
+    "description": "Auto-created workspace name after crash recovery"
+  },
+
+  "onboardingWelcome": {
+    "message": "Welcome to TabMod",
+    "description": "Onboarding step 1: welcome title"
+  },
+  "onboardingWelcomeDesc": {
+    "message": "Your tabs, organized. Save, search, and restore your browser tabs with one click.",
+    "description": "Onboarding step 1: welcome description"
+  },
+  "onboardingStep1": {
+    "message": "Save your first tabs",
+    "description": "Onboarding step 2: save tabs"
+  },
+  "onboardingStep1Desc": {
+    "message": "Press Alt+Shift+A or click the extension icon to save all open tabs at once.",
+    "description": "Onboarding step 2: instructions"
+  },
+  "onboardingStep2": {
+    "message": "Organize and search",
+    "description": "Onboarding step 3: organize"
+  },
+  "onboardingStep2Desc": {
+    "message": "Group tabs into workspaces. Use the search bar to find any tab instantly.",
+    "description": "Onboarding step 3: instructions"
+  },
+  "onboardingStep3": {
+    "message": "Restore anytime",
+    "description": "Onboarding step 4: restore"
+  },
+  "onboardingStep3Desc": {
+    "message": "Click Restore to reopen a tab. Restore All to reopen everything at once.",
+    "description": "Onboarding step 4: instructions"
+  },
+  "onboardingComplete": {
+    "message": "You're all set!",
+    "description": "Onboarding completion title"
+  },
+  "onboardingCompleteDesc": {
+    "message": "Your tabs will never be lost again. Save your first tabs now!",
+    "description": "Onboarding completion description"
+  },
+  "onboardingCTA": {
+    "message": "Save All Tabs Now",
+    "description": "Onboarding final CTA button"
+  },
+  "onboardingSkip": {
+    "message": "Skip tutorial",
+    "description": "Skip onboarding button"
+  }
+}

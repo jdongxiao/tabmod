@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=400">
+<title>TabMod</title>
+<link rel="stylesheet" href="../styles/variables.css">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app" class="app">
+    <!-- Header: Search + Save All -->
+    <header class="header" role="banner">
+      <div class="header-top">
+        <span class="logo" aria-label="TabMod">TabMod</span>
+        <div class="save-all-container">
+          <button id="saveAllBtn" class="btn-save-all" aria-label="Save all tabs">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span id="saveAllLabel" data-i18n="saveAllButton">Save All</span>
+            <span id="tabCountBadge" class="badge" aria-live="polite">0</span>
+          </button>
+        </div>
+      </div>
+      <div class="search-container">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10 10l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input
+          id="searchInput"
+          type="text"
+          class="search-input"
+          placeholder="Search tabs…"
+          aria-label="Search tabs"
+          autocomplete="off"
+        />
+        <button id="searchClearBtn" class="search-clear" aria-label="Clear search" hidden>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Workspace Navigation -->
+    <nav id="workspaceNav" class="workspace-nav" role="tablist" aria-label="Workspaces">
+      <!-- Rendered by workspace-nav.js -->
+      <div class="nav-loading" aria-hidden="true">
+        <span class="nav-skeleton"></span>
+        <span class="nav-skeleton"></span>
+        <span class="nav-skeleton"></span>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="mainContent" class="main-content">
+
+      <!-- Tab List View -->
+      <section id="tabListView" class="view active" role="tabpanel">
+        <div id="tabListContainer" class="tab-list-container">
+          <!-- Rendered by tab-list.js -->
+          <div class="loading-skeleton" aria-label="Loading">
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings View -->
+      <section id="settingsView" class="view" role="tabpanel" hidden>
+        <div class="settings-scroll">
+          <div class="settings-section">
+            <h2 class="settings-title" data-i18n="settingsAppearance">Appearance</h2>
+            <div class="settings-row">
+              <label for="themeSelect" data-i18n="settingsTheme">Theme</label>
+              <select id="themeSelect" class="settings-select">
+                <option value="system" data-i18n="themeSystem">System</option>
+                <option value="light" data-i18n="themeLight">Light</option>
+                <option value="dark" data-i18n="themeDark">Dark</option>
+              </select>
+            </div>
+            <div class="settings-row">
+              <label for="langSelect" data-i18n="settingsLanguage">Language</label>
+              <select id="langSelect" class="settings-select">
+                <option value="en">English</option>
+                <option value="zh_CN">简体中文</option>
+                <option value="ja">日本語</option>
+              </select>
+            </div>
+            <div class="settings-row">
+              <label for="autoSaveToggle" data-i18n="autoSaveEnabled">Auto-save</label>
+              <button id="autoSaveToggle" class="toggle-btn" role="switch" aria-checked="true">
+                <span class="toggle-knob"></span>
+              </button>
+            </div>
+            <div class="settings-row" id="autoSaveIntervalRow">
+              <label for="autoSaveInterval" data-i18n="autoSaveInterval">Auto-save interval</label>
+              <select id="autoSaveInterval" class="settings-select">
+                <option value="5" data-i18n="autoSaveEvery5">Every 5 minutes</option>
+                <option value="15" selected data-i18n="autoSaveEvery15">Every 15 minutes</option>
+                <option value="30" data-i18n="autoSaveEvery30">Every 30 minutes</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Cloud Sync Section -->
+          <div class="settings-section">
+            <h2 class="settings-title">☁️ Cloud Sync</h2>
+            <div id="syncStatusArea" class="sync-status">
+              <div class="sync-status-icon" id="syncStatusIcon">○</div>
+              <div class="sync-status-text">
+                <span id="syncStatusLabel" class="sync-label">Not signed in</span>
+                <span id="syncStatusDetail" class="sync-detail">Sign in to sync across devices</span>
+              </div>
+            </div>
+            <div id="syncAuthArea" class="sync-auth">
+              <div class="sync-auth-form" id="syncForm">
+                <input id="syncEmail" type="email" class="settings-input" placeholder="Email" autocomplete="email">
+                <input id="syncPassword" type="password" class="settings-input" placeholder="Password" autocomplete="current-password">
+                <button id="syncSignInBtn" class="settings-btn sync-btn" data-i18n="signIn">Sign In</button>
+                <button id="syncSignUpBtn" class="settings-btn sync-btn-secondary" data-i18n="signUp">Sign Up</button>
+              </div>
+              <div class="sync-signedin" id="syncSignedIn" hidden>
+                <span class="sync-email-label" id="syncUserEmail">user@example.com</span>
+                <button id="syncToggleBtn" class="settings-btn sync-btn">
+                  <span id="syncToggleLabel">Enable Sync</span>
+                </button>
+                <button id="syncSignOutBtn" class="settings-btn sync-btn-secondary">Sign Out</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2 class="settings-title" data-i18n="settingsData">Data</h2>
+            <div class="settings-row">
+              <button id="exportBtn" class="settings-btn" data-i18n="settingsExport">Export all data</button>
+            </div>
+            <div class="settings-row">
+              <button id="clearBtn" class="settings-btn settings-btn-danger" data-i18n="settingsClearAll">Clear all data</button>
+            </div>
+          </div>
+
+          <!-- Pro Upgrade Section -->
+          <div class="settings-section pro-section">
+            <h2 class="settings-title pro-section-title">✨ Pro</h2>
+            <div class="pro-card">
+              <div class="pro-header">
+                <span class="pro-name">TabMod Pro</span>
+                <span class="pro-price" data-i18n="proPriceYearly">$29.99/year</span>
+              </div>
+              <ul class="pro-features">
+                <li><span class="pro-check">✓</span> <span data-i18n="proFeatureSync">Cloud sync across devices</span></li>
+                <li><span class="pro-check">✓</span> <span data-i18n="proFeatureUnlimited">Unlimited tab lists &amp; workspaces</span></li>
+                <li><span class="pro-check">✓</span> <span data-i18n="proFeatureSnooze">Tab snoozing to save memory</span></li>
+                <li><span class="pro-check">✓</span> <span data-i18n="proFeatureAI">AI auto-classification</span></li>
+                <li><span class="pro-check">✓</span> <span data-i18n="proFeaturePriority">Priority email support</span></li>
+              </ul>
+              <div class="pro-price-row">
+                <span class="pro-price-tag" data-i18n="proPriceYearly">$29.99/year</span>
+                <span class="pro-savings" data-i18n="proSavings">Save 37%</span>
+              </div>
+              <button id="upgradeBtn" class="btn-upgrade-pro">
+                <span data-i18n="proUpgradeNow">Upgrade Now</span>
+              </button>
+              <div class="pro-compact-table">
+                <div class="pct-row pct-head">
+                  <span class="pct-feat">Feature</span>
+                  <span class="pct-free">Free</span>
+                  <span class="pct-pro">Pro</span>
+                </div>
+                <div class="pct-row">
+                  <span class="pct-feat">Tab lists</span>
+                  <span class="pct-free">15 max</span>
+                  <span class="pct-pro">∞</span>
+                </div>
+                <div class="pct-row">
+                  <span class="pct-feat">Workspaces</span>
+                  <span class="pct-free">2 max</span>
+                  <span class="pct-pro">∞</span>
+                </div>
+                <div class="pct-row pct-highlight">
+                  <span class="pct-feat">☁️ Cloud sync</span>
+                  <span class="pct-free">✗</span>
+                  <span class="pct-pro">✓</span>
+                </div>
+                <div class="pct-row pct-highlight">
+                  <span class="pct-feat">💤 Tab snoozing</span>
+                  <span class="pct-free">✗</span>
+                  <span class="pct-pro">✓</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2 class="settings-title" data-i18n="settingsAbout">About</h2>
+            <div class="settings-row">
+              <span class="settings-label" data-i18n="settingsVersion">Version</span>
+              <span class="settings-value">1.0.0</span>
+            </div>
+            <div class="settings-row">
+              <a id="feedbackLink" class="settings-link" href="#" data-i18n="settingsFeedback">Send feedback</a>
+            </div>
+            <div class="settings-row">
+              <a id="privacyLink" class="settings-link" href="#" data-i18n="settingsPrivacy">Privacy policy</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats View -->
+      <section id="statsView" class="view" role="tabpanel" hidden>
+        <div class="stats-content">
+          <div class="stat-card">
+            <span class="stat-value" id="statTabsSaved">0</span>
+            <span class="stat-label" data-i18n="statsTabsSaved">Tabs saved</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statTabsRestored">0</span>
+            <span class="stat-label" data-i18n="statsTabsRestored">Tabs restored</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statMemorySaved">0 MB</span>
+            <span class="stat-label" data-i18n="statsMemorySaved">Memory saved</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Toolbar -->
+    <footer class="toolbar" role="toolbar" aria-label="Main actions">
+      <button id="toolbarSettings" class="toolbar-btn" aria-label="Settings" data-view="settingsView">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 10a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M13.5 8a5.5 5.5 0 01-.3 1.8l1.2 1a.8.8 0 01.2 1l-.7 1.2a.8.8 0 01-1 .3l-1.4-.6a5.5 5.5 0 01-1.5.9l-.2 1.4a.8.8 0 01-.8.7H7.2a.8.8 0 01-.8-.7l-.2-1.4a5.5 5.5 0 01-1.5-.9l-1.4.6a.8.8 0 01-1-.3l-.7-1.2a.8.8 0 01.2-1l1.2-1A5.5 5.5 0 012.5 8a5.5 5.5 0 01.3-1.8l-1.2-1a.8.8 0 01-.2-1l.7-1.2a.8.8 0 011-.3l1.4.6a5.5 5.5 0 011.5-.9l.2-1.4a.8.8 0 01.8-.7h1.6a.8.8 0 01.8.7l.2 1.4a5.5 5.5 0 011.5.9l1.4-.6a.8.8 0 011 .3l.7 1.2a.8.8 0 01-.2 1l-1.2 1A5.5 5.5 0 0113.5 8z" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      </button>
+      <button id="toolbarStats" class="toolbar-btn" aria-label="Statistics" data-view="statsView">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <rect x="1" y="10" width="3" height="5" rx="1" fill="currentColor" opacity="0.5"/>
+          <rect x="6.5" y="6" width="3" height="9" rx="1" fill="currentColor" opacity="0.7"/>
+          <rect x="12" y="1" width="3" height="14" rx="1" fill="currentColor"/>
+        </svg>
+      </button>
+      <button id="toolbarExport" class="toolbar-btn" aria-label="Export" data-view="exportView">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 1v10M4 7l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M1 13v1.5A1.5 1.5 0 002.5 16h11a1.5 1.5 0 001.5-1.5V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container" role="alert" aria-live="assertive"></div>
+  </div>
+
+  <!-- All scripts load as external files (MV3 CSP requirement) -->
+  <script src="popup.js" type="module"></script>
+</body>
+</html>
