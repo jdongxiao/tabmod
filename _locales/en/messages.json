@@ -1,6 +1,6 @@
 {
   "extDescription": {
-    "message": "Smart tab manager with one-click save, search, workspaces and optional cross-device sync.",
+    "message": "TabMod is a fast tab manager & session saver: one-click save, instant search, workspaces, cross-device sync. OneTab alternative.",
     "description": "Extension description shown in Chrome Web Store and chrome://extensions"
   },
   "extName": {
@@ -464,5 +464,18 @@
   "onboardingSkip": {
     "message": "Skip tutorial",
     "description": "Skip onboarding button"
+  },
+
+  "reviewBannerTitle": {
+    "message": "Enjoying TabMod? A rating helps us a lot ▸",
+    "description": "Non-modal review prompt banner text"
+  },
+  "reviewBtnRate": {
+    "message": "Rate on Chrome Web Store",
+    "description": "Review prompt button: open the Chrome Web Store rating page"
+  },
+  "reviewBtnLater": {
+    "message": "Not now",
+    "description": "Review prompt button: dismiss the prompt"
   }
 }

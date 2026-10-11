@@ -1,5 +1,5 @@
 {
-  "extDescription": { "message": "ワンクリック保存、検索、ワークスペース、オプションのデバイス間同期を備えたスマートタブマネージャー。", "description": "拡張機能の説明" },
+  "extDescription": { "message": "ワンクリックで全タブ保存、高速検索、ワークスペース、デバイス間同期。軽量な OneTab 代替タブマネージャー。", "description": "拡張機能の説明" },
   "extName": { "message": "TabMod", "description": "拡張機能名" },
   "cmdSaveAll": { "message": "すべてのタブを保存", "description": "ショートカット：すべてのタブを保存" },
   "cmdSaveCurrent": { "message": "現在のタブを保存", "description": "ショートカット：現在のタブを保存" },
@@ -47,5 +47,8 @@
   "onboardingWelcome": { "message": "TabMod へようこそ", "description": "オンボーディング" },
   "onboardingWelcomeDesc": { "message": "タブを整理整頓。ワンクリックでタブの保存、検索、復元ができます。", "description": "オンボーディング説明" },
   "onboardingComplete": { "message": "準備完了！", "description": "オンボーディング完了" },
-  "onboardingSkip": { "message": "チュートリアルをスキップ", "description": "スキップ" }
+  "onboardingSkip": { "message": "チュートリアルをスキップ", "description": "スキップ" },
+  "reviewBannerTitle": { "message": "TabMod は気に入りましたか？評価をいただけると励みになります ▸", "description": "レビュー促すバナー" },
+  "reviewBtnRate": { "message": "Chrome ウェブストアで評価", "description": "レビューボタン" },
+  "reviewBtnLater": { "message": "あとで", "description": "レビュー-後で" }
 }

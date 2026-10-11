@@ -2,7 +2,7 @@
 // 在 CI 或发布前运行：node scripts/check-build.mjs
 // 检查项：无内联脚本、无 CDN 引用、无 eval
 
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync, readdirSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -18,7 +18,6 @@ let errors = [];
 
 // 递归扫描 dist 目录中的所有 HTML 文件
 function scanDir(dir) {
-  const { readdirSync, statSync } = await import('fs');
   const entries = readdirSync(dir);
   for (const entry of entries) {
     const fullPath = join(dir, entry);

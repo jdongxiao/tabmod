@@ -255,6 +255,11 @@ export async function addTabsToWorkspace(workspaceId, tabs) {
   // Update stats
   await incrementStat('totalTabsSaved', added);
 
+  // Count successful saves for the review prompt (one save operation = +1)
+  if (added > 0) {
+    await incrementSaveCount();
+  }
+
   // Fire post-save hooks (used for auto-sync)
   if (added > 0) {
     await Promise.allSettled(postSaveHooks.map((fn) => fn({ added, deduped, workspaceId })));
@@ -585,6 +590,30 @@ export async function isOnboardingDone() {
 
 export async function setOnboardingDone() {
   await scheduleWrite(STORAGE_KEYS.ONBOARDING_DONE, true);
+}
+
+// ---- Review Prompt Counter ----
+
+/**
+ * Increment the successful-save counter used to gate the review prompt.
+ * Called from addTabsToWorkspace whenever at least one tab is actually added.
+ * Uses a direct write (not scheduleWrite) so the count is durable before the
+ * caller returns and can read it back for the trigger check.
+ */
+async function incrementSaveCount() {
+  const data = await chrome.storage.local.get('tm_save_count');
+  const count = (data.tm_save_count || 0) + 1;
+  await chrome.storage.local.set({ tm_save_count: count });
+}
+
+/**
+ * Decide whether the review prompt should be shown after a Save All.
+ * Conditions: >= 3 successful saves, and the user has not dismissed it yet.
+ * @returns {Promise<boolean>}
+ */
+export async function shouldShowReviewPrompt() {
+  const data = await chrome.storage.local.get(['tm_save_count', 'tm_review_prompted']);
+  return (data.tm_save_count || 0) >= 3 && data.tm_review_prompted !== true;
 }
 
 // ---- Post-Save Hooks (for auto-sync, logging, etc.) ----

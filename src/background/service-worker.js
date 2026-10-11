@@ -88,7 +88,8 @@ const MESSAGE_HANDLERS = {
 
     const ws = await storage.getOrCreateDefaultWorkspace();
     const result = await storage.addTabsToWorkspace(ws.id, tabData);
-    return { success: true, added: result.added, deduped: result.deduped };
+    const showReviewPrompt = await storage.shouldShowReviewPrompt();
+    return { success: true, added: result.added, deduped: result.deduped, showReviewPrompt };
   },
 
   [MSG.SAVE_CURRENT]: async () => {

@@ -16,6 +16,8 @@ import { showToast } from '../lib/toast.js';
 import { signIn, signUp, signOut, restoreSession, getCurrentUser, isAuthenticated } from '../lib/supabase.js';
 import { fullSync, onSyncStatus } from '../lib/sync.js';
 
+const REVIEW_URL = 'https://chromewebstore.google.com/detail/tabmod/dihmaghebhiabcdampjplpidcjkkaodm/reviews';
+
 // ---- State ----
 let state = {
   workspaces: [],
@@ -270,6 +272,11 @@ function handleMessage(msg) {
         if (snoozed) {
           showToast('Tab snoozed — click grey tab to reload');
         }
+      }
+
+      // Show the review prompt after a Save All that meets the threshold
+      if (msg.payload.showReviewPrompt) {
+        showReviewBanner();
       }
 
       // Refresh state (delay to let debounced writes flush)
@@ -599,6 +606,46 @@ function hideRestoreProgress() {
   const el = document.querySelector('.restore-progress');
   if (el) el.remove();
   restoreInProgress = false;
+}
+
+// ---- Review Prompt Banner ----
+
+function showReviewBanner() {
+  if (document.getElementById('reviewBanner')) return;
+
+  const banner = document.createElement('div');
+  banner.id = 'reviewBanner';
+  banner.className = 'review-banner';
+  banner.innerHTML = `
+    <p class="review-banner-text">${t('reviewBannerTitle')}</p>
+    <div class="review-banner-actions">
+      <button id="reviewRateBtn" class="review-btn review-btn-primary">${t('reviewBtnRate')}</button>
+      <button id="reviewLaterBtn" class="review-btn review-btn-secondary">${t('reviewBtnLater')}</button>
+    </div>
+  `;
+
+  const toolbar = document.querySelector('.toolbar');
+  if (toolbar) {
+    dom.app.insertBefore(banner, toolbar);
+  } else {
+    dom.app.appendChild(banner);
+  }
+
+  banner.querySelector('#reviewRateBtn').addEventListener('click', () => {
+    chrome.storage.local.set({ tm_review_prompted: true });
+    chrome.tabs.create({ url: REVIEW_URL });
+    hideReviewBanner();
+  });
+
+  banner.querySelector('#reviewLaterBtn').addEventListener('click', () => {
+    chrome.storage.local.set({ tm_review_prompted: true });
+    hideReviewBanner();
+  });
+}
+
+function hideReviewBanner() {
+  const banner = document.getElementById('reviewBanner');
+  if (banner) banner.remove();
 }
 
 // ---- Error State ----

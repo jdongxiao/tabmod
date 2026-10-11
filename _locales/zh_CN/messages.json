@@ -1,5 +1,5 @@
 {
-  "extDescription": { "message": "智能标签管理器，支持一键保存、搜索、工作区和可选的跨设备同步。", "description": "扩展描述" },
+  "extDescription": { "message": "智能标签管理器：一键保存全部标签、秒搜已存页面、工作区分组、跨设备同步。OneTab 的轻量替代品。", "description": "扩展描述" },
   "extName": { "message": "TabMod", "description": "扩展名称" },
   "cmdSaveAll": { "message": "保存所有标签", "description": "快捷键：保存所有打开的标签" },
   "cmdSaveCurrent": { "message": "保存当前标签", "description": "快捷键：保存当前标签" },
@@ -63,5 +63,8 @@
   "onboardingStep3": { "message": "随时恢复", "description": "引导-步骤3" },
   "onboardingComplete": { "message": "准备就绪！", "description": "引导-完成" },
   "onboardingCTA": { "message": "立即保存所有标签", "description": "引导-按钮" },
-  "onboardingSkip": { "message": "跳过教程", "description": "跳过引导" }
+  "onboardingSkip": { "message": "跳过教程", "description": "跳过引导" },
+  "reviewBannerTitle": { "message": "喜欢 TabMod 吗？给我们评分会很有帮助 ▸", "description": "评分引导横幅" },
+  "reviewBtnRate": { "message": "前往 Chrome 应用商店评分", "description": "评分引导按钮" },
+  "reviewBtnLater": { "message": "暂不", "description": "评分引导-稍后" }
 }
