@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — TabMod</title>
+<meta name="description" content="TabMod privacy policy: what data the extension handles, what never leaves your device, and your rights under GDPR and CCPA.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="assets/icon128.png">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0f0f1a;--bg2:#151527;--card:#1b1b30;--line:#2a2a45;--fg:#e9e9f2;--fg2:#a0a0bd;--acc:#5b8cff;--ok:#34c759}
+  body{background:var(--bg);color:var(--fg);line-height:1.75;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--acc);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:820px;margin:0 auto;padding:0 22px}
+  nav{position:sticky;top:0;z-index:10;background:rgba(15,15,26,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--fg)}
+  .brand img{width:28px;height:28px;border-radius:7px}
+  nav .back{margin-left:auto;font-size:14px;color:var(--fg2)}
+  header{padding:56px 0 10px}
+  h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.02em;margin-bottom:12px}
+  .lead{color:var(--fg2);font-size:16.5px}
+  .meta{margin-top:16px;font-size:13.6px;color:var(--fg2);background:var(--card);border:1px solid var(--line);
+    border-radius:10px;padding:12px 16px;display:inline-block}
+  h2{font-size:21px;margin:40px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h3{font-size:16.5px;margin:24px 0 9px;color:var(--fg)}
+  p{margin-bottom:13px;color:#cfcfe2}
+  ul{padding-left:22px;margin-bottom:15px}
+  li{margin-bottom:7px;color:#cfcfe2}
+  table{width:100%;border-collapse:collapse;font-size:14.4px;margin:14px 0 20px;min-width:520px}
+  th,td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:var(--card);font-weight:600;color:var(--fg)}
+  td{color:#cfcfe2}
+  .tw{overflow-x:auto}
+  .box{border-radius:10px;padding:15px 19px;margin:18px 0;font-size:14.8px}
+  .box-ok{background:rgba(52,199,89,.08);border-left:3px solid var(--ok);color:#cfcfe2}
+  .box-no{background:rgba(255,107,107,.08);border-left:3px solid #ff6b6b;color:#cfcfe2}
+  code{background:var(--card);padding:2px 6px;border-radius:5px;font-size:13.4px;color:#d8d8ec}
+  footer{margin-top:52px;border-top:1px solid var(--line);padding:32px 0 46px;color:var(--fg2);font-size:14px}
+  footer a{color:var(--fg2)}footer a:hover{color:var(--fg)}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="index.html"><img src="assets/icon128.png" alt="TabMod icon">TabMod</a>
+  <a class="back" href="index.html">← Back to TabMod</a>
+</div></nav>
+
+<div class="wrap">
+<header>
+  <h1>Privacy Policy</h1>
+  <p class="lead">Your data stays yours. TabMod is designed for privacy by default.</p>
+  <div class="meta">Last updated: <b>October 8, 2026</b></div>
+</header>
+
+<h2>Introduction</h2>
+<p>TabMod ("we", "our", or "us") is a Chrome extension that helps you manage, organize, and sync your browser tabs. We are committed to protecting your privacy. This policy explains what data we handle, how we handle it, and your rights over that data.</p>
+<div class="box box-ok"><b>Our core principle:</b> all data stays on your device by default. TabMod is designed to work fully offline without any data leaving your computer. Cloud sync is an optional feature that you must explicitly enable.</div>
+<div class="box box-ok"><b>Privacy by design:</b> we collect the absolute minimum needed for the extension to function. No tracking scripts, no analytics cookies, no third-party data sharing.</div>
+
+<h2>1. Data We Collect</h2>
+
+<h3>1.1 Local data (always stored, never transmitted)</h3>
+<p>When you use TabMod, the following data is stored exclusively on your device using Chrome's built-in <code>chrome.storage.local</code> API:</p>
+<div class="tw"><table>
+  <thead><tr><th>Data</th><th>Purpose</th><th>Storage</th></tr></thead>
+  <tbody>
+    <tr><td>Tab URLs and page titles</td><td>To display your saved tabs in organized lists</td><td>Local only</td></tr>
+    <tr><td>Workspace and folder names</td><td>To organize tabs into named groups</td><td>Local only</td></tr>
+    <tr><td>Extension settings (theme, language, etc.)</td><td>To remember your preferences</td><td>Local only</td></tr>
+    <tr><td>Anonymous usage counters</td><td>To show you stats (tabs saved, memory saved)</td><td>Local only</td></tr>
+  </tbody>
+</table></div>
+<p>We never have access to this data. It never leaves your computer unless you explicitly enable cloud sync.</p>
+
+<h3>1.2 Cloud sync data (optional)</h3>
+<p>If you choose to enable cloud sync, the following data is transmitted to our cloud provider (<b>Supabase</b>, hosted in the United States) and stored encrypted:</p>
+<div class="tw"><table>
+  <thead><tr><th>Data</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td>Tab URLs and page titles</td><td>Synced across your devices</td></tr>
+    <tr><td>Workspace/folder names and structure</td><td>Synced across your devices</td></tr>
+    <tr><td>Account email address</td><td>To identify your account</td></tr>
+    <tr><td>Sync metadata (timestamps, device identifiers)</td><td>To resolve conflicts between devices</td></tr>
+  </tbody>
+</table></div>
+
+<h3>1.3 Payment data</h3>
+<p>A paid Pro tier is in development and is <b>not currently on sale</b>. When it launches, subscriptions will be processed by <b>Lemon Squeezy</b> as merchant of record. We will not see, store, or process your payment details — card numbers, billing addresses, and payment information are handled entirely by Lemon Squeezy under their own privacy policy.</p>
+
+<h2>2. Data We Never Collect</h2>
+<div class="box box-no"><b>Never collected under any circumstances:</b> your browsing history · cookies, session tokens or authentication credentials · passwords or form data · the content of web pages you visit (beyond page title and URL of tabs you explicitly save) · personal identity information (name, address, phone number) · location data · health, financial, or other sensitive category data.</div>
+
+<h2>3. How We Handle Your Data</h2>
+
+<h3>3.1 Encryption</h3>
+<ul>
+  <li><b>In transit:</b> all communication with our servers uses HTTPS/TLS encryption.</li>
+  <li><b>At rest (cloud):</b> cloud-synced data is stored in encrypted databases.</li>
+  <li><b>At rest (local):</b> local data uses Chrome's built-in sandboxed storage, protected by the operating system's own encryption.</li>
+</ul>
+
+<h3>3.2 Data retention</h3>
+<ul>
+  <li><b>Local data:</b> retained until you uninstall the extension or clear it in settings. Uninstalling TabMod removes all locally stored data.</li>
+  <li><b>Cloud data:</b> retained while your account is active. You can delete all cloud data at any time from within the extension settings. Deleted data is purged from our servers within 30 days.</li>
+</ul>
+
+<h3>3.3 Third-party services</h3>
+<div class="tw"><table>
+  <thead><tr><th>Service</th><th>Purpose</th><th>Data shared</th></tr></thead>
+  <tbody>
+    <tr><td>Supabase</td><td>Cloud database for optional sync</td><td>Tab URLs, titles, account email</td></tr>
+    <tr><td>Lemon Squeezy</td><td>Payment processing for Pro subscriptions (when launched)</td><td>Payment details — handled by Lemon Squeezy, not us</td></tr>
+  </tbody>
+</table></div>
+<p>We do not use Google Analytics, Facebook Pixel, or any advertising or tracking SDKs.</p>
+
+<h2>4. Your Rights (GDPR &amp; CCPA)</h2>
+<p>If you are located in the European Economic Area (EEA), the United Kingdom, or California, you have the following rights:</p>
+<div class="tw"><table>
+  <thead><tr><th>Right</th><th>How to exercise it</th></tr></thead>
+  <tbody>
+    <tr><td>Access</td><td>Export your data from extension settings (JSON format)</td></tr>
+    <tr><td>Deletion</td><td>Use "Delete all cloud data" in extension settings, or email us</td></tr>
+    <tr><td>Data portability</td><td>Use the export function in settings to download your data</td></tr>
+    <tr><td>Object</td><td>Do not enable cloud sync — all data stays local by default</td></tr>
+    <tr><td>Rectification</td><td>Edit workspace and folder names directly in the extension</td></tr>
+  </tbody>
+</table></div>
+<p>To exercise any of these rights, contact us at <a href="mailto:privacy@tabmod.app">privacy@tabmod.app</a> or open an issue on our <a href="https://github.com/jdongxiao/tabmod/issues" target="_blank" rel="noopener">GitHub repository</a>. We respond within 30 days.</p>
+
+<h2>5. Data Security</h2>
+<ul>
+  <li>Cloud data encrypted in transit and at rest</li>
+  <li>Supabase Row-Level Security ensures you can only access your own data</li>
+  <li>No tracking scripts, analytics cookies, or third-party embeds</li>
+  <li>Minimal permission model — the extension only requests permissions essential to its function (<code>tabs</code>, <code>storage</code>, <code>alarms</code>, <code>contextMenus</code>)</li>
+  <li>No background network requests at all unless you enable cloud sync</li>
+</ul>
+
+<h2>6. Children's Privacy</h2>
+<p>TabMod is not directed at children under 13 (or under 16 in the EEA). We do not knowingly collect data from children. If you believe a child has provided us with data, contact us and we will delete it.</p>
+
+<h2>7. Changes to This Policy</h2>
+<p>We will notify users of material changes via an in-extension notification on the next launch after the update, by updating the "Last updated" date on this page, and via a notice on our Chrome Web Store listing. We encourage you to review this policy periodically.</p>
+
+<h2>8. Contact</h2>
+<p>Questions, concerns, or data requests:</p>
+<ul>
+  <li><b>Email:</b> <a href="mailto:privacy@tabmod.app">privacy@tabmod.app</a></li>
+  <li><b>Support email:</b> <a href="mailto:support@tabmod.app">support@tabmod.app</a></li>
+  <li><b>Developer:</b> TabMod Team</li>
+  <li><b>Postal address:</b> available on request for legal purposes</li>
+</ul>
+<p>We are a small independent development team. For GDPR Article 27 representation in the EU, contact us and we will coordinate a representative.</p>
+</div>
+
+<footer><div class="wrap">
+  © 2026 TabMod · <a href="index.html">Home</a> · <a href="https://chromewebstore.google.com/detail/tabmod/dihmaghebhiabcdampjplpidcjkkaodm" target="_blank" rel="noopener">Chrome Web Store</a>
+</div></footer>
+
+</body>
+</html>

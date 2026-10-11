@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TabMod — Fast Tab Manager &amp; Session Saver for Chrome</title>
+<meta name="description" content="TabMod is a lightweight Chrome tab manager and session saver. Save every tab in one click, search them instantly, restore sessions after a crash, and organize workspaces. Privacy-first OneTab alternative.">
+<meta name="keywords" content="tab manager, chrome tab manager, session manager, save tabs, OneTab alternative, Session Buddy alternative, tab organizer, tab search, session saver">
+<link rel="canonical" href="https://jdongxiao.github.io/tabmod/">
+<link rel="icon" href="assets/icon128.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TabMod — Fast Tab Manager &amp; Session Saver for Chrome">
+<meta property="og:description" content="Save every tab in one click. Search instantly. Restore after a crash. A lightweight, privacy-first OneTab alternative.">
+<meta property="og:image" content="assets/screenshot-1-main.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0f0f1a; --bg2:#151527; --card:#1b1b30; --line:#2a2a45;
+    --fg:#e9e9f2; --fg2:#a0a0bd; --acc:#5b8cff; --acc2:#7c5bff; --ok:#34c759;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--fg);line-height:1.65;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--acc);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(15,15,26,.88);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--fg)}
+  .brand img{width:28px;height:28px;border-radius:7px}
+  nav .links{margin-left:auto;display:flex;gap:20px;font-size:14px}
+  nav .links a{color:var(--fg2)}
+  nav .links a:hover{color:var(--fg);text-decoration:none}
+  @media(max-width:720px){nav .links{display:none}}
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:10px;
+    font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:.18s}
+  .btn-p{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
+  .btn-p:hover{filter:brightness(1.12);text-decoration:none;transform:translateY(-1px)}
+  .btn-g{background:transparent;color:var(--fg);border-color:var(--line)}
+  .btn-g:hover{border-color:var(--acc);text-decoration:none}
+  .btn-sm{padding:9px 17px;font-size:14px}
+  /* hero */
+  header.hero{padding:74px 0 54px;position:relative;overflow:hidden}
+  header.hero::before{content:'';position:absolute;top:-260px;left:50%;transform:translateX(-50%);
+    width:900px;height:560px;background:radial-gradient(closest-side,rgba(91,140,255,.20),transparent 70%);
+    pointer-events:none}
+  .hero h1{font-size:clamp(30px,5.2vw,52px);line-height:1.15;letter-spacing:-.02em;margin-bottom:18px}
+  .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--acc),var(--acc2));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero p.lead{font-size:clamp(16px,2.2vw,19px);color:var(--fg2);max-width:660px;margin-bottom:28px}
+  .hero .cta{display:flex;gap:13px;flex-wrap:wrap;align-items:center}
+  .trust{margin-top:16px;font-size:13.5px;color:var(--fg2)}
+  .trust b{color:var(--ok);font-weight:600}
+  .shot-main{margin-top:44px;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    box-shadow:0 26px 60px rgba(0,0,0,.5);background:var(--bg2)}
+  .shot-main img{display:block;width:100%;height:auto}
+  /* sections */
+  section{padding:64px 0}
+  section.alt{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(23px,3.4vw,32px);letter-spacing:-.01em;margin-bottom:14px}
+  .sub{color:var(--fg2);margin-bottom:36px;max-width:680px}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:24px}
+  .card h3{font-size:17px;margin-bottom:9px;display:flex;align-items:center;gap:9px}
+  .card p{font-size:14.6px;color:var(--fg2)}
+  .mark{color:var(--acc);font-size:15px}
+  /* gallery */
+  .gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px}
+  figure{background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{padding:13px 16px;font-size:14px;color:var(--fg2);border-top:1px solid var(--line)}
+  figcaption b{color:var(--fg);font-weight:600}
+  /* table */
+  .tw{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:14.6px;min-width:560px}
+  th,td{padding:13px 15px;text-align:left;border-bottom:1px solid var(--line)}
+  th{color:var(--fg);font-weight:600;background:var(--card)}
+  td{color:var(--fg2)}
+  td b{color:var(--fg)}
+  .yes{color:var(--ok);font-weight:600}
+  .no{color:#ff6b6b;font-weight:600}
+  .note{font-size:12.6px;color:var(--fg2);margin-top:12px}
+  /* pricing */
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:26px}
+  .plan.hi{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc) inset}
+  .plan .price{font-size:31px;font-weight:700;margin:9px 0 4px}
+  .plan .per{font-size:13.5px;color:var(--fg2)}
+  .plan ul{list-style:none;margin-top:18px}
+  .plan li{padding:7px 0;font-size:14.6px;color:var(--fg2)}
+  .plan li::before{content:'◆ ';color:var(--acc)}
+  .badge{display:inline-block;font-size:11.6px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:3px 9px;border-radius:999px;background:rgba(91,140,255,.16);color:var(--acc);border:1px solid rgba(91,140,255,.35)}
+  /* faq */
+  details{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:16px 19px;margin-bottom:11px}
+  summary{cursor:pointer;font-weight:600;font-size:15.6px;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:'▶ ';color:var(--acc);font-size:11px;margin-right:5px}
+  details[open] summary::before{content:'▼ '}
+  details p{margin-top:11px;color:var(--fg2);font-size:14.7px}
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:38px 0;color:var(--fg2);font-size:14px}
+  footer .cols{display:flex;gap:28px;flex-wrap:wrap;align-items:center}
+  footer .cols .r{margin-left:auto;display:flex;gap:20px}
+  footer a{color:var(--fg2)}
+  footer a:hover{color:var(--fg)}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="./"><img src="assets/icon128.png" alt="TabMod icon">TabMod</a>
+  <div class="links">
+    <a href="#features">Features</a>
+    <a href="#screenshots">Screenshots</a>
+    <a href="#compare">Compare</a>
+    <a href="#faq">FAQ</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <a class="btn btn-p btn-sm" href="https://chromewebstore.google.com/detail/tabmod/dihmaghebhiabcdampjplpidcjkkaodm" target="_blank" rel="noopener">▶ Add to Chrome</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <h1>TabMod — the <em>fast tab manager</em> &amp; session saver for Chrome</h1>
+  <p class="lead">Save every open tab in one click. Search them instantly. Restore any session after a crash. A lightweight, privacy-first OneTab alternative that doesn't strand you on one computer.</p>
+  <div class="cta">
+    <a class="btn btn-p" href="https://chromewebstore.google.com/detail/tabmod/dihmaghebhiabcdampjplpidcjkkaodm" target="_blank" rel="noopener">▶ Add to Chrome — Free</a>
+    <a class="btn btn-g" href="#screenshots">See it in action</a>
+  </div>
+  <p class="trust"><b>◈ Privacy-first:</b> all data stays on your device by default &nbsp;·&nbsp; No account required &nbsp;·&nbsp; No tracking scripts</p>
+  <div class="shot-main"><img src="assets/screenshot-1-main.png" alt="TabMod popup showing saved tab lists and workspaces" width="1280" height="800"></div>
+</div></header>
+
+<section id="features" class="alt"><div class="wrap">
+  <h2>Built for people with 50+ tabs open</h2>
+  <p class="sub">Most tab managers save your tabs and stop there. TabMod keeps them searchable, organized, and recoverable — without the bloat.</p>
+  <div class="grid3">
+    <div class="card">
+      <h3><span class="mark">▶</span> One-click save &amp; restore</h3>
+      <p>Hit <b>Save All</b> (or <b>Alt+Shift+A</b>) to collect every tab across every window and free the memory instantly. Restore one tab, one list, or everything.</p>
+    </div>
+    <div class="card">
+      <h3><span class="mark">◈</span> Instant search</h3>
+      <p>Find any tab you ever saved by title or URL, in milliseconds, with real-time highlighting. Stop scrolling through hundreds of bookmarks.</p>
+    </div>
+    <div class="card">
+      <h3><span class="mark">◆</span> Workspaces &amp; crash recovery</h3>
+      <p>Group tabs by project — Work, Research, Reading. Sessions survive browser crashes and restarts, so a reboot never costs you a window full of tabs.</p>
+    </div>
+    <div class="card">
+      <h3><span class="mark">●</span> Export anything</h3>
+      <p>Your data leaves with you: <b>JSON</b>, <b>Markdown</b>, or native <b>Chrome bookmarks</b>. No lock-in, no proprietary format.</p>
+    </div>
+    <div class="card">
+      <h3><span class="mark">◐</span> Light &amp; dark theme</h3>
+      <p>Follows your system preference, or pin it. Easy on the eyes for late-night research sessions.</p>
+    </div>
+    <div class="card">
+      <h3><span class="mark">✦</span> Optional cloud sync</h3>
+      <p>Turn it on and your saved tabs follow you between work PC, home laptop, and Mac. Off by default — nothing leaves your computer until you ask.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="screenshots"><div class="wrap">
+  <h2>Screenshots</h2>
+  <p class="sub">Real UI, no mockups. Five views: saving, searching, organizing, syncing, and the full feature set.</p>
+  <div class="gal">
+    <figure><img src="assets/screenshot-2-saveall.png" alt="Saving all open tabs in one click with TabMod" loading="lazy" width="1280" height="800"><figcaption><b>Save All</b> — every window, one click, memory released.</figcaption></figure>
+    <figure><img src="assets/screenshot-3-search.png" alt="Searching saved tabs by title and URL in TabMod" loading="lazy" width="1280" height="800"><figcaption><b>Search</b> — find a saved tab by title or URL instantly.</figcaption></figure>
+    <figure><img src="assets/screenshot-4-sync.png" alt="TabMod optional cloud sync across devices" loading="lazy" width="1280" height="800"><figcaption><b>Sync</b> — optional, account-based, off until you enable it.</figcaption></figure>
+    <figure><img src="assets/screenshot-5-features.png" alt="TabMod full feature overview" loading="lazy" width="1280" height="800"><figcaption><b>Features</b> — workspaces, export, themes, and more.</figcaption></figure>
+    <figure><img src="assets/screenshot-1-main.png" alt="TabMod main popup interface" loading="lazy" width="1280" height="800"><figcaption><b>Main view</b> — saved lists and workspaces at a glance.</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="compare" class="alt"><div class="wrap">
+  <h2>TabMod vs. the usual suspects</h2>
+  <p class="sub">If you're coming from OneTab or Session Buddy, this is the short version.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>&nbsp;</th><th>TabMod</th><th>OneTab</th><th>Session Buddy</th></tr></thead>
+    <tbody>
+      <tr><td><b>One-click save all</b></td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      <tr><td><b>Search saved tabs</b></td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td></tr>
+      <tr><td><b>Cross-device sync</b></td><td class="yes">✓ optional</td><td class="no">✗</td><td class="no">✗</td></tr>
+      <tr><td><b>Crash recovery</b></td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td></tr>
+      <tr><td><b>Export JSON / Markdown</b></td><td class="yes">✓</td><td class="no">✗ (text only)</td><td class="no">✗ (HTML)</td></tr>
+      <tr><td><b>Light &amp; dark theme</b></td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Comparison based on publicly available product information as of October 2026. Competitor features change — check their current listings.</p>
+</div></section>
+
+<section id="pricing"><div class="wrap">
+  <h2>Pricing</h2>
+  <p class="sub">The extension is free, and the useful parts always will be. A Pro tier with unlimited everything is in development.</p>
+  <div class="plans">
+    <div class="plan">
+      <span class="badge">Free forever</span>
+      <div class="price">$0</div>
+      <div class="per">no account required</div>
+      <ul>
+        <li>One-click save all / save current</li>
+        <li>Instant search across saved tabs</li>
+        <li>Workspaces &amp; folders</li>
+        <li>Export JSON / Markdown / Chrome bookmarks</li>
+        <li>Light &amp; dark theme</li>
+        <li>Optional account-based cloud sync</li>
+      </ul>
+      <p style="margin-top:20px"><a class="btn btn-p" href="https://chromewebstore.google.com/detail/tabmod/dihmaghebhiabcdampjplpidcjkkaodm" target="_blank" rel="noopener">▶ Add to Chrome</a></p>
+    </div>
+    <div class="plan hi">
+      <span class="badge">In development</span>
+      <div class="price">Pro</div>
+      <div class="per">unlimited workspaces &amp; tab snoozing</div>
+      <ul>
+        <li>Unlimited workspaces and tab lists</li>
+        <li>Tab snoozing — discard idle tabs, reload on demand</li>
+        <li>Priority support</li>
+      </ul>
+      <p style="margin-top:20px;color:var(--fg2);font-size:14px">Not on sale yet. Install the free version and you'll be notified in-app when Pro launches.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="faq" class="alt"><div class="wrap">
+  <h2>FAQ</h2>
+  <p class="sub">The questions people actually ask before installing a tab manager.</p>
+  <details><summary>Is TabMod a OneTab alternative?</summary><p>Yes. TabMod does what OneTab does — collapse all your tabs into a saved list with one click — and adds instant search, workspaces, crash recovery, three export formats, and optional cross-device sync.</p></details>
+  <details><summary>Does TabMod work offline?</summary><p>Completely. Every feature except optional cloud sync runs on your device. Nothing is transmitted anywhere until you explicitly enable sync.</p></details>
+  <details><summary>Do you track my browsing?</summary><p>No. There are no analytics scripts, no tracking pixels, and no advertising SDKs. Tab URLs and titles are stored locally in Chrome's sandboxed storage. See the <a href="privacy.html">privacy policy</a> for the full detail, including exactly what leaves your device if you enable sync.</p></details>
+  <details><summary>How do I restore tabs after a browser crash?</summary><p>TabMod saves sessions as you work. After a crash or restart, open the popup and restore the most recent snapshot — whole windows, individual lists, or single tabs.</p></details>
+  <details><summary>How heavy is it?</summary><p>The current build is about 44 KB and uses a minimal permission set (tabs, storage, alarms, context menus). No background network calls unless you turn on sync.</p></details>
+  <details><summary>Is there a Pro plan?</summary><p>A Pro tier (unlimited workspaces, tab snoozing) is in development and not on sale yet. The free version is not time-limited and includes all core features.</p></details>
+</div></section>
+
+<section><div class="wrap" style="text-align:center">
+  <h2>Stop losing windows full of tabs</h2>
+  <p class="sub" style="margin:0 auto 26px">Free, 44 KB, privacy-first. Install it in ten seconds and save your first session before the next reboot.</p>
+  <a class="btn btn-p" href="https://chromewebstore.google.com/detail/tabmod/dihmaghebhiabcdampjplpidcjkkaodm" target="_blank" rel="noopener">▶ Add to Chrome — Free</a>
+</div></section>
+
+<footer><div class="wrap cols">
+  <span>© 2026 TabMod</span>
+  <div class="r">
+    <a href="https://chromewebstore.google.com/detail/tabmod/dihmaghebhiabcdampjplpidcjkkaodm" target="_blank" rel="noopener">Chrome Web Store</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="https://github.com/jdongxiao/tabmod/issues" target="_blank" rel="noopener">Support</a>
+  </div>
+</div></footer>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"TabMod",
+  "applicationCategory":"BrowserApplication",
+  "operatingSystem":"Chrome",
+  "description":"Lightweight Chrome tab manager and session saver. One-click save, instant search, workspaces, crash recovery, optional cloud sync.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "url":"https://chromewebstore.google.com/detail/tabmod/dihmaghebhiabcdampjplpidcjkkaodm"
+}
+</script>
+
+</body>
+</html>
