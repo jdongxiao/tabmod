@@ -52,10 +52,9 @@ docs/
 
 ## ⚠️ 提交前必须先解决的两件事
 
-1. **邮箱域名 `tabmod.app` 未注册**
-   `privacy.html` 与 `index.html` 里用的 `privacy@tabmod.app` / `support@tabmod.app` 目前**收不到信**（DNS 解析失败）。
-   要么注册该域名并开通邮箱，要么全局替换成可用邮箱。
-   替换点：`privacy.html` 内 4 处、`index.html` 内 2 处（搜 `tabmod.app`）。
+1. ~~**邮箱域名 `tabmod.app` 未注册**~~ → **已解决（2026-10-08）**
+   联系方式已统一替换为 `jdongxiao@gmail.com`（`privacy.html` 内 3 处）。
+   若日后注册 `tabmod.app`，再换回 `privacy@tabmod.app` 更专业。
 
 2. **Pro 付费尚未做**（扩展里点 Upgrade 只弹 "Pro coming soon"）
    因此落地页**没有**写购买链接和价格——写 "$29.99 立即购买" 会指向不存在的流程，属于虚假宣传。
