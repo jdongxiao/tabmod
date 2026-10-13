@@ -9,7 +9,7 @@
 // ============================================================
 
 import { connectToSW, onMessage, MSG, createRequest } from '../lib/messaging.js';
-import { t, tn, formatNumber, initI18n } from '../lib/i18n.js';
+import { t, tn, formatNumber, initI18n, applyI18n } from '../lib/i18n.js';
 import { renderTabList, refreshTabList, setPortAPI } from '../components/tab-list.js';
 import { renderWorkspaceNav } from '../components/workspace-nav.js';
 import { showToast } from '../lib/toast.js';
@@ -65,6 +65,7 @@ const dom = {
 async function init() {
   // Initialize i18n with saved language preference
   await initI18n();
+  applyI18n();
 
   // Connect to Service Worker
   portAPI = connectToSW(handleMessage);

@@ -10,13 +10,35 @@ let messagesCache = null;
 let currentLang = null;
 
 /**
+ * Map a UI language tag (e.g. "zh-CN", "en-US") onto a locale folder we
+ * actually ship ("zh_CN", "en", "ja", "ru"). Chrome's getUILanguage()
+ * returns hyphenated tags while _locales folder names use underscores -
+ * without this mapping the fetch 404s and every string silently falls
+ * back to English.
+ * @param {string} lang
+ * @returns {string} a locale folder name we ship
+ */
+function resolveLocale(lang) {
+  const SUPPORTED = ['en', 'zh_CN', 'ja', 'ru'];
+  const norm = String(lang || '').trim().replace(/-/g, '_');
+  if (SUPPORTED.includes(norm)) return norm;
+  const ci = SUPPORTED.find((s) => s.toLowerCase() === norm.toLowerCase());
+  if (ci) return ci;
+  const base = norm.split('_')[0].toLowerCase();
+  if (base === 'zh') return 'zh_CN';            // zh_TW / zh_HK / zh_Hans 一律给简体包
+  const byBase = SUPPORTED.find((s) => s.split('_')[0] === base);
+  return byBase || 'en';
+}
+
+/**
  * Load messages for a specific locale.
  * @param {string} lang - Language code (e.g., "en", "zh_CN", "ja")
  * @returns {Promise<object>} Loaded messages object
  */
 async function loadMessages(lang) {
+  const locale = resolveLocale(lang);
   try {
-    const url = chrome.runtime.getURL(`_locales/${lang}/messages.json`);
+    const url = chrome.runtime.getURL(`_locales/${locale}/messages.json`);
     const res = await fetch(url);
     if (!res.ok) throw new Error('Not found');
     return await res.json();
@@ -39,6 +61,8 @@ export async function initI18n(lang) {
     const data = await chrome.storage.local.get('settings');
     lang = data?.settings?.language || chrome.i18n.getUILanguage();
   }
+
+  lang = resolveLocale(lang);        // ← normalize "zh-CN" → "zh_CN" before cache key compare
 
   if (lang === currentLang && messagesCache) return;
 
@@ -122,4 +146,28 @@ export function formatDate(timestamp, options = {}) {
  */
 export function formatNumber(n) {
   return new Intl.NumberFormat(getUILanguage()).format(n);
+}
+
+/**
+ * Apply translations to the DOM. Elements carrying data-i18n get their
+ * textContent replaced; data-i18n-placeholder / data-i18n-title set those
+ * attributes. Idempotent - safe to call more than once.
+ * @param {ParentNode} [root=document]
+ */
+export function applyI18n(root = document) {
+  root.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    const msg = t(key);
+    if (msg && msg !== key) el.textContent = msg;
+  });
+  root.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    const msg = t(key);
+    if (msg && msg !== key) el.setAttribute('placeholder', msg);
+  });
+  root.querySelectorAll('[data-i18n-title]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-title');
+    const msg = t(key);
+    if (msg && msg !== key) el.setAttribute('title', msg);
+  });
 }

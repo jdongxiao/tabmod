@@ -6,6 +6,8 @@
 // and marks onboarding as complete.
 // ============================================================
 
+import { initI18n, applyI18n, t } from '../lib/i18n.js';
+
 const TOTAL_STEPS = 4;
 let currentStep = 1;
 
@@ -21,7 +23,10 @@ const dom = {
 };
 
 // ---- Init ----
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await initI18n();
+  applyI18n();
+
   // event listeners
   dom.skipBtn.addEventListener('click', completeOnboarding);
   dom.saveNowBtn.addEventListener('click', handleSaveAll);
@@ -87,7 +92,7 @@ window.goToStep = goToStep;
 async function handleSaveAll() {
   const btn = dom.saveNowBtn;
   btn.disabled = true;
-  btn.textContent = 'Saving…';
+  btn.textContent = t('statusSaving');
   btn.style.opacity = '0.7';
 
   try {
@@ -108,7 +113,7 @@ async function handleSaveAll() {
     });
 
     if (result && result.success) {
-      btn.textContent = `✓ Saved ${result.added || tabData.length} tabs!`;
+      btn.textContent = `✓ ${t('tabSaved_other', result.added || tabData.length)}`;
       btn.style.background = 'var(--accent-green)';
       btn.style.opacity = '1';
 
@@ -116,13 +121,13 @@ async function handleSaveAll() {
         completeOnboarding();
       }, 1200);
     } else {
-      btn.textContent = '⚡ Save All Tabs Now';
+      btn.textContent = '⚡ ' + t('onboardingCTA');
       btn.disabled = false;
       btn.style.opacity = '1';
     }
   } catch (err) {
     console.error('[TabMod Onboarding] Save failed:', err);
-    btn.textContent = '⚡ Save All Tabs Now';
+    btn.textContent = '⚡ ' + t('onboardingCTA');
     btn.disabled = false;
     btn.style.opacity = '1';
   }
