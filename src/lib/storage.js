@@ -15,7 +15,6 @@ const STORAGE_KEYS = {
   STATS: 'stats',
   TRASH: 'trash',
   SCHEMA_VERSION: 'schemaVersion',
-  SYNC_QUEUE: 'syncQueue',
   LAST_SESSION: 'lastSession',
   ONBOARDING_DONE: 'onboardingDone',
 };
@@ -29,7 +28,6 @@ const DEFAULT_SETTINGS = {
   language: 'en',
   autoSaveEnabled: true,
   autoSaveIntervalMinutes: 15,
-  syncEnabled: false,
   autoSaveOnClose: true,
   onboardingDone: false,
 };
@@ -260,7 +258,7 @@ export async function addTabsToWorkspace(workspaceId, tabs) {
     await incrementSaveCount();
   }
 
-  // Fire post-save hooks (used for auto-sync)
+  // Fire post-save hooks
   if (added > 0) {
     await Promise.allSettled(postSaveHooks.map((fn) => fn({ added, deduped, workspaceId })));
   }

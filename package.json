@@ -1,6 +1,6 @@
 {
   "name": "tabmod-extension",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "TabMod - Smart Tab Manager & Session Organizer",
   "private": true,
   "type": "module",

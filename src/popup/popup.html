@@ -107,33 +107,6 @@
             </div>
           </div>
 
-          <!-- Cloud Sync Section -->
-          <div class="settings-section">
-            <h2 class="settings-title">☁️ Cloud Sync</h2>
-            <div id="syncStatusArea" class="sync-status">
-              <div class="sync-status-icon" id="syncStatusIcon">○</div>
-              <div class="sync-status-text">
-                <span id="syncStatusLabel" class="sync-label">Not signed in</span>
-                <span id="syncStatusDetail" class="sync-detail">Sign in to sync across devices</span>
-              </div>
-            </div>
-            <div id="syncAuthArea" class="sync-auth">
-              <div class="sync-auth-form" id="syncForm">
-                <input id="syncEmail" type="email" class="settings-input" placeholder="Email" autocomplete="email">
-                <input id="syncPassword" type="password" class="settings-input" placeholder="Password" autocomplete="current-password">
-                <button id="syncSignInBtn" class="settings-btn sync-btn" data-i18n="signIn">Sign In</button>
-                <button id="syncSignUpBtn" class="settings-btn sync-btn-secondary" data-i18n="signUp">Sign Up</button>
-              </div>
-              <div class="sync-signedin" id="syncSignedIn" hidden>
-                <span class="sync-email-label" id="syncUserEmail">user@example.com</span>
-                <button id="syncToggleBtn" class="settings-btn sync-btn">
-                  <span id="syncToggleLabel">Enable Sync</span>
-                </button>
-                <button id="syncSignOutBtn" class="settings-btn sync-btn-secondary">Sign Out</button>
-              </div>
-            </div>
-          </div>
-
           <div class="settings-section">
             <h2 class="settings-title" data-i18n="settingsData">Data</h2>
             <div class="settings-row">
@@ -144,63 +117,11 @@
             </div>
           </div>
 
-          <!-- Pro Upgrade Section -->
-          <div class="settings-section pro-section">
-            <h2 class="settings-title pro-section-title">✨ Pro</h2>
-            <div class="pro-card">
-              <div class="pro-header">
-                <span class="pro-name">TabMod Pro</span>
-                <span class="pro-price" data-i18n="proPriceYearly">$29.99/year</span>
-              </div>
-              <ul class="pro-features">
-                <li><span class="pro-check">✓</span> <span data-i18n="proFeatureSync">Cloud sync across devices</span></li>
-                <li><span class="pro-check">✓</span> <span data-i18n="proFeatureUnlimited">Unlimited tab lists &amp; workspaces</span></li>
-                <li><span class="pro-check">✓</span> <span data-i18n="proFeatureSnooze">Tab snoozing to save memory</span></li>
-                <li><span class="pro-check">✓</span> <span data-i18n="proFeatureAI">AI auto-classification</span></li>
-                <li><span class="pro-check">✓</span> <span data-i18n="proFeaturePriority">Priority email support</span></li>
-              </ul>
-              <div class="pro-price-row">
-                <span class="pro-price-tag" data-i18n="proPriceYearly">$29.99/year</span>
-                <span class="pro-savings" data-i18n="proSavings">Save 37%</span>
-              </div>
-              <button id="upgradeBtn" class="btn-upgrade-pro">
-                <span data-i18n="proUpgradeNow">Upgrade Now</span>
-              </button>
-              <div class="pro-compact-table">
-                <div class="pct-row pct-head">
-                  <span class="pct-feat">Feature</span>
-                  <span class="pct-free">Free</span>
-                  <span class="pct-pro">Pro</span>
-                </div>
-                <div class="pct-row">
-                  <span class="pct-feat">Tab lists</span>
-                  <span class="pct-free">15 max</span>
-                  <span class="pct-pro">∞</span>
-                </div>
-                <div class="pct-row">
-                  <span class="pct-feat">Workspaces</span>
-                  <span class="pct-free">2 max</span>
-                  <span class="pct-pro">∞</span>
-                </div>
-                <div class="pct-row pct-highlight">
-                  <span class="pct-feat">☁️ Cloud sync</span>
-                  <span class="pct-free">✗</span>
-                  <span class="pct-pro">✓</span>
-                </div>
-                <div class="pct-row pct-highlight">
-                  <span class="pct-feat">💤 Tab snoozing</span>
-                  <span class="pct-free">✗</span>
-                  <span class="pct-pro">✓</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div class="settings-section">
             <h2 class="settings-title" data-i18n="settingsAbout">About</h2>
             <div class="settings-row">
               <span class="settings-label" data-i18n="settingsVersion">Version</span>
-              <span class="settings-value">1.0.0</span>
+              <span class="settings-value">1.0.2</span>
             </div>
             <div class="settings-row">
               <a id="feedbackLink" class="settings-link" href="#" data-i18n="settingsFeedback">Send feedback</a>

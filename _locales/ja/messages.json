@@ -1,54 +1,378 @@
 {
-  "extDescription": { "message": "ワンクリックで全タブ保存、高速検索、ワークスペース、デバイス間同期。軽量な OneTab 代替タブマネージャー。", "description": "拡張機能の説明" },
-  "extName": { "message": "TabMod", "description": "拡張機能名" },
-  "cmdSaveAll": { "message": "すべてのタブを保存", "description": "ショートカット：すべてのタブを保存" },
-  "cmdSaveCurrent": { "message": "現在のタブを保存", "description": "ショートカット：現在のタブを保存" },
-  "cmdOpenPopup": { "message": "TabMod ポップアップを開く", "description": "ショートカット：ポップアップを開く" },
-  "contextSaveCurrent": { "message": "このタブを TabMod に保存", "description": "右クリックメニュー：現在のタブを保存" },
-  "contextSaveAll": { "message": "すべてのタブを TabMod に保存", "description": "右クリックメニュー：すべて保存" },
-  "contextSaveRight": { "message": "右側のタブを保存", "description": "右クリックメニュー：右側のタブを保存" },
-  "saveAllButton": { "message": "すべて保存", "description": "保存ボタン" },
-  "searchPlaceholder": { "message": "タブを検索…", "description": "検索プレースホルダー" },
-  "restoreButton": { "message": "復元", "description": "タブを復元" },
-  "restoreAllButton": { "message": "すべて復元", "description": "すべて復元" },
-  "deleteButton": { "message": "削除", "description": "タブを削除" },
-  "cancelButton": { "message": "キャンセル", "description": "キャンセル" },
-  "confirmButton": { "message": "確認", "description": "確認" },
-  "tabSaved_one": { "message": "1 個のタブを保存しました", "description": "保存通知" },
-  "tabSaved_other": { "message": "$1 個のタブを保存しました", "description": "保存通知（複数）" },
-  "tabRestored_one": { "message": "1 個のタブを復元しました", "description": "復元通知" },
-  "tabRestored_other": { "message": "$1 個のタブを復元しました", "description": "復元通知（複数）" },
-  "tabDeleted_one": { "message": "1 個のタブを削除しました", "description": "削除通知" },
-  "tabDeleted_other": { "message": "$1 個のタブを削除しました", "description": "削除通知（複数）" },
-  "undoButton": { "message": "元に戻す", "description": "元に戻す" },
-  "restoreProgress": { "message": "復元中 $1/$2…", "description": "復元進捗" },
-  "restoreComplete": { "message": "$1 個のタブを復元しました", "description": "復元完了" },
-  "workspaceAll": { "message": "すべて", "description": "すべてのワークスペース" },
-  "workspaceNew": { "message": "新規ワークスペース", "description": "新規作成" },
-  "workspaceDefault": { "message": "一般", "description": "デフォルト名" },
-  "workspaceRename": { "message": "名前の変更", "description": "名称変更" },
-  "workspaceEmpty": { "message": "このワークスペースにはタブがありません。", "description": "空のワークスペース" },
-  "workspaceCount": { "message": "$1 個のタブ", "description": "タブ数" },
-  "emptyStateTitle": { "message": "保存されたタブはまだありません", "description": "空状態タイトル" },
-  "emptyStateDesc": { "message": "下のボタンをクリックするか、Alt+Shift+A ですべてのタブを保存します。", "description": "空状態の説明" },
-  "emptyStateCTA": { "message": "開いているタブをすべて保存", "description": "空状態ボタン" },
-  "settingsAppearance": { "message": "外観", "description": "設定-外観" },
-  "settingsTheme": { "message": "テーマ", "description": "設定-テーマ" },
-  "themeLight": { "message": "ライト", "description": "ライトテーマ" },
-  "themeDark": { "message": "ダーク", "description": "ダークテーマ" },
-  "themeSystem": { "message": "システム", "description": "システム設定に従う" },
-  "settingsData": { "message": "データ", "description": "設定-データ" },
-  "settingsExport": { "message": "データをエクスポート", "description": "エクスポート" },
-  "settingsClearAll": { "message": "すべてのデータを消去", "description": "データ消去" },
-  "settingsClearAllConfirm": { "message": "保存されたすべてのタブとワークスペースが完全に削除されます。この操作は元に戻せません。", "description": "消去確認" },
-  "statsTabsSaved": { "message": "保存されたタブ", "description": "統計" },
-  "statsTabsRestored": { "message": "復元されたタブ", "description": "統計" },
-  "statsMemorySaved": { "message": "節約されたメモリ", "description": "統計" },
-  "onboardingWelcome": { "message": "TabMod へようこそ", "description": "オンボーディング" },
-  "onboardingWelcomeDesc": { "message": "タブを整理整頓。ワンクリックでタブの保存、検索、復元ができます。", "description": "オンボーディング説明" },
-  "onboardingComplete": { "message": "準備完了！", "description": "オンボーディング完了" },
-  "onboardingSkip": { "message": "チュートリアルをスキップ", "description": "スキップ" },
-  "reviewBannerTitle": { "message": "TabMod は気に入りましたか？評価をいただけると励みになります ▸", "description": "レビュー促すバナー" },
-  "reviewBtnRate": { "message": "Chrome ウェブストアで評価", "description": "レビューボタン" },
-  "reviewBtnLater": { "message": "あとで", "description": "レビュー-後で" }
+  "extDescription": {
+    "message": "高速でプライベートなタブマネージャー：ワンクリック保存、即時検索、ワークスペース、エクスポート。完全オフライン・アカウント不要。軽量な OneTab 代替。",
+    "description": "拡張機能の説明"
+  },
+  "extName": {
+    "message": "TabMod — タブ管理｜OneTab 代替",
+    "description": "拡張機能名"
+  },
+  "cmdSaveAll": {
+    "message": "すべてのタブを保存",
+    "description": "ショートカット：すべてのタブを保存"
+  },
+  "cmdSaveCurrent": {
+    "message": "現在のタブを保存",
+    "description": "ショートカット：現在のタブを保存"
+  },
+  "cmdOpenPopup": {
+    "message": "TabMod ポップアップを開く",
+    "description": "ショートカット：ポップアップを開く"
+  },
+  "contextSaveCurrent": {
+    "message": "このタブを TabMod に保存",
+    "description": "右クリックメニュー：現在のタブを保存"
+  },
+  "contextSaveAll": {
+    "message": "すべてのタブを TabMod に保存",
+    "description": "右クリックメニュー：すべて保存"
+  },
+  "contextSaveRight": {
+    "message": "右側のタブを保存",
+    "description": "右クリックメニュー：右側のタブを保存"
+  },
+  "popupTitle": {
+    "message": "TabMod",
+    "description": "Popup window header title"
+  },
+  "searchPlaceholder": {
+    "message": "タブを検索…",
+    "description": "検索プレースホルダー"
+  },
+  "saveAllButton": {
+    "message": "すべて保存",
+    "description": "保存ボタン"
+  },
+  "restoreButton": {
+    "message": "復元",
+    "description": "タブを復元"
+  },
+  "restoreAllButton": {
+    "message": "すべて復元",
+    "description": "すべて復元"
+  },
+  "deleteButton": {
+    "message": "削除",
+    "description": "タブを削除"
+  },
+  "moreButton": {
+    "message": "More",
+    "description": "More options button (context menu trigger)"
+  },
+  "cancelButton": {
+    "message": "キャンセル",
+    "description": "キャンセル"
+  },
+  "confirmButton": {
+    "message": "確認",
+    "description": "確認"
+  },
+  "closeButton": {
+    "message": "Close",
+    "description": "Close dialog button"
+  },
+  "tabSaved_one": {
+    "message": "1 個のタブを保存しました",
+    "description": "保存通知"
+  },
+  "tabSaved_other": {
+    "message": "$1 個のタブを保存しました",
+    "description": "保存通知（複数）"
+  },
+  "tabRestored_one": {
+    "message": "1 個のタブを復元しました",
+    "description": "復元通知"
+  },
+  "tabRestored_other": {
+    "message": "$1 個のタブを復元しました",
+    "description": "復元通知（複数）"
+  },
+  "tabDeleted_one": {
+    "message": "1 個のタブを削除しました",
+    "description": "削除通知"
+  },
+  "tabDeleted_other": {
+    "message": "$1 個のタブを削除しました",
+    "description": "削除通知（複数）"
+  },
+  "undoButton": {
+    "message": "元に戻す",
+    "description": "元に戻す"
+  },
+  "restoreProgress": {
+    "message": "復元中 $1/$2…",
+    "description": "復元進捗"
+  },
+  "restoreComplete": {
+    "message": "$1 個のタブを復元しました",
+    "description": "復元完了"
+  },
+  "workspaceAll": {
+    "message": "すべて",
+    "description": "すべてのワークスペース"
+  },
+  "workspaceNew": {
+    "message": "新規ワークスペース",
+    "description": "新規作成"
+  },
+  "workspaceDefault": {
+    "message": "一般",
+    "description": "デフォルト名"
+  },
+  "workspaceRename": {
+    "message": "名前の変更",
+    "description": "名称変更"
+  },
+  "workspaceDelete": {
+    "message": "Delete workspace",
+    "description": "Delete workspace action"
+  },
+  "workspaceDeleteConfirm": {
+    "message": "Delete this workspace and all its tabs?",
+    "description": "Confirmation dialog when deleting a workspace"
+  },
+  "workspaceEmpty": {
+    "message": "このワークスペースにはタブがありません。",
+    "description": "空のワークスペース"
+  },
+  "workspaceCount": {
+    "message": "$1 個のタブ",
+    "description": "タブ数"
+  },
+  "langChanged": {
+    "message": "Language changed. Close and reopen the popup.",
+    "description": "Toast shown when language is changed"
+  },
+  "noNewTabs": {
+    "message": "No new tabs found. All already saved.",
+    "description": "Notification when save-all finds only duplicates"
+  },
+  "emptyStateTitle": {
+    "message": "保存されたタブはまだありません",
+    "description": "空状態タイトル"
+  },
+  "emptyStateDesc": {
+    "message": "下のボタンをクリックするか、Alt+Shift+A ですべてのタブを保存します。",
+    "description": "空状態の説明"
+  },
+  "emptyStateCTA": {
+    "message": "開いているタブをすべて保存",
+    "description": "空状態ボタン"
+  },
+  "autoSaveEnabled": {
+    "message": "Auto-save",
+    "description": "Settings toggle: enable automatic periodic saving"
+  },
+  "autoSaveInterval": {
+    "message": "Auto-save interval",
+    "description": "Settings label for auto-save frequency"
+  },
+  "autoSaveEvery5": {
+    "message": "Every 5 minutes",
+    "description": "Auto-save interval option"
+  },
+  "autoSaveEvery15": {
+    "message": "Every 15 minutes",
+    "description": "Auto-save interval option"
+  },
+  "autoSaveEvery30": {
+    "message": "Every 30 minutes",
+    "description": "Auto-save interval option"
+  },
+  "settingsTitle": {
+    "message": "Settings",
+    "description": "Settings panel title"
+  },
+  "settingsAppearance": {
+    "message": "外観",
+    "description": "設定-外観"
+  },
+  "settingsTheme": {
+    "message": "テーマ",
+    "description": "設定-テーマ"
+  },
+  "themeLight": {
+    "message": "ライト",
+    "description": "ライトテーマ"
+  },
+  "themeDark": {
+    "message": "ダーク",
+    "description": "ダークテーマ"
+  },
+  "themeSystem": {
+    "message": "システム",
+    "description": "システム設定に従う"
+  },
+  "settingsLanguage": {
+    "message": "Language",
+    "description": "Settings: language selection"
+  },
+  "settingsData": {
+    "message": "データ",
+    "description": "設定-データ"
+  },
+  "settingsExport": {
+    "message": "データをエクスポート",
+    "description": "エクスポート"
+  },
+  "settingsExportJSON": {
+    "message": "Export as JSON",
+    "description": "Export format option"
+  },
+  "settingsExportMD": {
+    "message": "Export as Markdown",
+    "description": "Export format option"
+  },
+  "settingsExportBookmarks": {
+    "message": "Export as HTML bookmarks",
+    "description": "Export format option"
+  },
+  "settingsExportSuccess": {
+    "message": "Data exported successfully",
+    "description": "Success notification after export"
+  },
+  "settingsClearAll": {
+    "message": "すべてのデータを消去",
+    "description": "データ消去"
+  },
+  "settingsClearAllConfirm": {
+    "message": "保存されたすべてのタブとワークスペースが完全に削除されます。この操作は元に戻せません。",
+    "description": "消去確認"
+  },
+  "settingsAbout": {
+    "message": "About",
+    "description": "Settings section: about the extension"
+  },
+  "settingsVersion": {
+    "message": "Version",
+    "description": "Label showing extension version"
+  },
+  "settingsFeedback": {
+    "message": "Send feedback",
+    "description": "Link to submit feedback"
+  },
+  "settingsPrivacy": {
+    "message": "Privacy policy",
+    "description": "Link to privacy policy"
+  },
+  "statsTitle": {
+    "message": "Statistics",
+    "description": "Statistics panel title"
+  },
+  "statsTabsSaved": {
+    "message": "保存されたタブ",
+    "description": "統計"
+  },
+  "statsTabsRestored": {
+    "message": "復元されたタブ",
+    "description": "統計"
+  },
+  "statsMemorySaved": {
+    "message": "節約されたメモリ",
+    "description": "統計"
+  },
+  "exportTitle": {
+    "message": "Export",
+    "description": "Export panel title"
+  },
+  "exportFormat": {
+    "message": "Format",
+    "description": "Label for export format selection"
+  },
+  "errorGeneric": {
+    "message": "Something went wrong. Please try again.",
+    "description": "Generic error message"
+  },
+  "errorSWDead": {
+    "message": "Extension encountered an error. Please refresh or restart from chrome://extensions.",
+    "description": "Error when Service Worker is unavailable"
+  },
+  "errorStorageFull": {
+    "message": "Storage is nearly full. Please export and clear old data.",
+    "description": "Error when chrome.storage is near capacity"
+  },
+  "errorNetwork": {
+    "message": "Network unavailable. Changes saved locally.",
+    "description": "Error when network is offline during sync"
+  },
+  "statusSaving": {
+    "message": "Saving…",
+    "description": "Status indicator while saving"
+  },
+  "statusLoading": {
+    "message": "Loading…",
+    "description": "Status indicator while loading data"
+  },
+  "crashRecoveryTitle": {
+    "message": "Crash Recovery",
+    "description": "Title for crash recovery notification"
+  },
+  "crashRecoveryDesc": {
+    "message": "Chrome closed unexpectedly. Your tabs have been auto-saved.",
+    "description": "Description shown after a Chrome crash"
+  },
+  "crashRecoveryWorkspace": {
+    "message": "Recovered ($1)",
+    "description": "Auto-created workspace name after crash recovery"
+  },
+  "onboardingWelcome": {
+    "message": "TabMod へようこそ",
+    "description": "オンボーディング"
+  },
+  "onboardingWelcomeDesc": {
+    "message": "タブを整理整頓。ワンクリックでタブの保存、検索、復元ができます。",
+    "description": "オンボーディング説明"
+  },
+  "onboardingStep1": {
+    "message": "Save your first tabs",
+    "description": "Onboarding step 2: save tabs"
+  },
+  "onboardingStep1Desc": {
+    "message": "Press Alt+Shift+A or click the extension icon to save all open tabs at once.",
+    "description": "Onboarding step 2: instructions"
+  },
+  "onboardingStep2": {
+    "message": "Organize and search",
+    "description": "Onboarding step 3: organize"
+  },
+  "onboardingStep2Desc": {
+    "message": "Group tabs into workspaces. Use the search bar to find any tab instantly.",
+    "description": "Onboarding step 3: instructions"
+  },
+  "onboardingStep3": {
+    "message": "Restore anytime",
+    "description": "Onboarding step 4: restore"
+  },
+  "onboardingStep3Desc": {
+    "message": "Click Restore to reopen a tab. Restore All to reopen everything at once.",
+    "description": "Onboarding step 4: instructions"
+  },
+  "onboardingComplete": {
+    "message": "準備完了！",
+    "description": "オンボーディング完了"
+  },
+  "onboardingCompleteDesc": {
+    "message": "Your tabs will never be lost again. Save your first tabs now!",
+    "description": "Onboarding completion description"
+  },
+  "onboardingCTA": {
+    "message": "Save All Tabs Now",
+    "description": "Onboarding final CTA button"
+  },
+  "onboardingSkip": {
+    "message": "チュートリアルをスキップ",
+    "description": "スキップ"
+  },
+  "reviewBannerTitle": {
+    "message": "TabMod は気に入りましたか？評価をいただけると励みになります ▸",
+    "description": "レビュー促すバナー"
+  },
+  "reviewBtnRate": {
+    "message": "Chrome ウェブストアで評価",
+    "description": "レビューボタン"
+  },
+  "reviewBtnLater": {
+    "message": "あとで",
+    "description": "レビュー-後で"
+  }
 }

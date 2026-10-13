@@ -13,8 +13,6 @@ import { t, tn, formatNumber, initI18n } from '../lib/i18n.js';
 import { renderTabList, refreshTabList, setPortAPI } from '../components/tab-list.js';
 import { renderWorkspaceNav } from '../components/workspace-nav.js';
 import { showToast } from '../lib/toast.js';
-import { signIn, signUp, signOut, restoreSession, getCurrentUser, isAuthenticated } from '../lib/supabase.js';
-import { fullSync, onSyncStatus } from '../lib/sync.js';
 
 const REVIEW_URL = 'https://chromewebstore.google.com/detail/tabmod/dihmaghebhiabcdampjplpidcjkkaodm/reviews';
 
@@ -58,23 +56,8 @@ const dom = {
   langSelect: $('langSelect'),
   exportBtn: $('exportBtn'),
   clearBtn: $('clearBtn'),
-  upgradeBtn: $('upgradeBtn'),
   autoSaveToggle: $('autoSaveToggle'),
   autoSaveInterval: $('autoSaveInterval'),
-  syncEmail: $('syncEmail'),
-  syncPassword: $('syncPassword'),
-  syncSignInBtn: $('syncSignInBtn'),
-  syncSignUpBtn: $('syncSignUpBtn'),
-  syncSignOutBtn: $('syncSignOutBtn'),
-  syncToggleBtn: $('syncToggleBtn'),
-  syncToggleLabel: $('syncToggleLabel'),
-  syncAuthArea: $('syncAuthArea'),
-  syncForm: $('syncForm'),
-  syncSignedIn: $('syncSignedIn'),
-  syncStatusLabel: $('syncStatusLabel'),
-  syncStatusDetail: $('syncStatusDetail'),
-  syncStatusIcon: $('syncStatusIcon'),
-  syncUserEmail: $('syncUserEmail'),
 };
 
 // ---- Initialization ----
@@ -106,9 +89,6 @@ async function init() {
 
     // Sync settings to UI
     const s = state.settings || {};
-    if (dom.syncToggleLabel) {
-      dom.syncToggleLabel.textContent = s.syncEnabled ? 'Sync Active' : 'Enable Sync';
-    }
     if (dom.autoSaveToggle) {
       dom.autoSaveToggle.setAttribute('aria-checked', s.autoSaveEnabled !== false);
     }
@@ -116,9 +96,6 @@ async function init() {
       dom.autoSaveInterval.value = String(s.autoSaveIntervalMinutes || 5);
     }
   });
-
-  // Check for existing sync session
-  checkSyncSession();
 }
 
 // ---- Event Binding ----
@@ -180,16 +157,6 @@ function bindEvents() {
 
   dom.exportBtn.addEventListener('click', handleExport);
   dom.clearBtn.addEventListener('click', handleClearAll);
-  dom.upgradeBtn.addEventListener('click', handleUpgrade);
-
-  // Cloud sync
-  dom.syncSignInBtn.addEventListener('click', handleSyncSignIn);
-  dom.syncSignUpBtn.addEventListener('click', handleSyncSignUp);
-  dom.syncSignOutBtn.addEventListener('click', handleSyncSignOut);
-  dom.syncToggleBtn.addEventListener('click', handleSyncToggle);
-
-  // Listen for sync status changes
-  onSyncStatus((status) => updateSyncStatusUI(status));
 }
 
 // ---- View Switching ----
@@ -419,123 +386,6 @@ function handleClearAll() {
       setTimeout(() => portAPI.send(createRequest(MSG.GET_STATE)), 100);
     }
   );
-}
-
-// ---- Cloud Sync Handlers ----
-
-async function handleSyncSignIn() {
-  const email = dom.syncEmail.value.trim();
-  const password = dom.syncPassword.value.trim();
-  if (!email || !password) { showToast('Enter email and password'); return; }
-
-  dom.syncSignInBtn.disabled = true;
-  dom.syncSignInBtn.textContent = 'Signing in…';
-
-  const { session, error } = await signIn(email, password);
-  dom.syncSignInBtn.disabled = false;
-  dom.syncSignInBtn.textContent = 'Sign In';
-
-  if (error) { showToast(error); return; }
-  if (session) {
-    showToast('Signed in!');
-    updateSyncUI(true, session.user.email);
-    fullSync(); // Trigger initial sync
-  }
-}
-
-async function handleSyncSignUp() {
-  const email = dom.syncEmail.value.trim();
-  const password = dom.syncPassword.value.trim();
-  if (!email || !password) { showToast('Enter email and password'); return; }
-  if (password.length < 6) { showToast('Password must be at least 6 characters'); return; }
-
-  dom.syncSignUpBtn.disabled = true;
-  dom.syncSignUpBtn.textContent = 'Signing up…';
-
-  const { user, error } = await signUp(email, password);
-  dom.syncSignUpBtn.disabled = false;
-  dom.syncSignUpBtn.textContent = 'Sign Up';
-
-  if (error) { showToast(error); return; }
-  showToast('Account created! Check your email to confirm, then sign in.');
-}
-
-async function handleSyncSignOut() {
-  await signOut();
-  updateSyncUI(false);
-  showToast('Signed out');
-}
-
-async function handleSyncToggle() {
-  const settings = state.settings || {};
-  const newEnabled = !settings.syncEnabled;
-
-  // Send update to SW
-  portAPI.send(createRequest(MSG.UPDATE_SETTINGS, {
-    settings: { syncEnabled: newEnabled },
-  }));
-
-  if (newEnabled) {
-    showToast('Syncing…');
-    await fullSync();
-  } else {
-    showToast('Sync disabled');
-  }
-}
-
-function updateSyncUI(loggedIn, email) {
-  if (loggedIn) {
-    dom.syncForm.hidden = true;
-    dom.syncSignedIn.hidden = false;
-    dom.syncUserEmail.textContent = email || 'Signed in';
-    dom.syncStatusLabel.textContent = 'Signed in';
-    dom.syncStatusDetail.textContent = 'Sync ready';
-    dom.syncStatusIcon.className = 'sync-status-icon connected';
-    dom.syncStatusIcon.textContent = '✓';
-    dom.syncToggleLabel.textContent = state.settings?.syncEnabled ? 'Sync Active' : 'Enable Sync';
-  } else {
-    dom.syncForm.hidden = false;
-    dom.syncSignedIn.hidden = true;
-    dom.syncStatusLabel.textContent = 'Not signed in';
-    dom.syncStatusDetail.textContent = 'Sign in to sync across devices';
-    dom.syncStatusIcon.className = 'sync-status-icon';
-    dom.syncStatusIcon.textContent = '○';
-  }
-}
-
-function updateSyncStatusUI(status) {
-  switch (status.status) {
-    case 'syncing':
-      dom.syncStatusLabel.textContent = 'Syncing…';
-      dom.syncStatusDetail.textContent = 'Writing changes…';
-      dom.syncStatusIcon.className = 'sync-status-icon syncing';
-      dom.syncStatusIcon.textContent = '⟳';
-      break;
-    case 'success':
-      dom.syncStatusLabel.textContent = 'Synced';
-      dom.syncStatusDetail.textContent = status.message || 'All up to date';
-      dom.syncStatusIcon.className = 'sync-status-icon connected';
-      dom.syncStatusIcon.textContent = '✓';
-      break;
-    case 'error':
-      dom.syncStatusLabel.textContent = 'Sync error';
-      dom.syncStatusDetail.textContent = status.message || 'Will retry later';
-      dom.syncStatusIcon.className = 'sync-status-icon';
-      dom.syncStatusIcon.textContent = '!';
-      break;
-  }
-}
-
-// ---- Restore session on popup open ----
-async function checkSyncSession() {
-  const { session } = await restoreSession();
-  if (session) {
-    updateSyncUI(true, session.user?.email);
-  }
-}
-
-function handleUpgrade() {
-  showToast('Pro coming soon — cloud sync & more!');
 }
 
 // ---- Toast (re-exported from toast module) ----

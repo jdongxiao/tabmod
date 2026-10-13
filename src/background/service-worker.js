@@ -14,8 +14,6 @@
 
 import * as storage from '../lib/storage.js';
 import { MSG, handlePopupConnection } from '../lib/messaging.js';
-import { fullSync, pull, onAuthChanged } from '../lib/sync.js';
-import { restoreSession } from '../lib/supabase.js';
 
 // ---- 🔴 TOP-LEVEL: Register all event listeners synchronously ----
 
@@ -42,13 +40,8 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
   handleTabClosed(tabId, removeInfo);
 });
 
-// Alarm events (auto-save, sync, cleanup, resume restore, cloud-sync)
+// Alarm events (auto-save, cleanup, resume restore)
 chrome.alarms.onAlarm.addListener((alarm) => {
-  // cloud-sync is handled separately to avoid import circularity
-  if (alarm.name === 'cloud-sync') {
-    handleCloudSync();
-    return;
-  }
   handleAlarm(alarm);
 });
 
@@ -335,7 +328,6 @@ async function handleInstalled(details) {
     chrome.alarms.create('debounced-save', { periodInMinutes: 1 });
     chrome.alarms.create('cleanup-trash', { periodInMinutes: 60 * 24 });
     chrome.alarms.create('check-storage', { periodInMinutes: 60 });
-	    chrome.alarms.create('cloud-sync', { periodInMinutes: 15 });
 
     // Create context menu items
     chrome.contextMenus.create({
@@ -442,21 +434,11 @@ async function handleAlarm(alarm) {
         const remainingTabs = tabs.filter((t) => resume.tabIds.includes(t.id));
         if (remainingTabs.length > 0) {
           await performBatchRestore(resume.workspaceId, remainingTabs);
-	        // cloud-sync handled via onTabSaved hook + periodic alarm in init
         }
       }
       break;
     }
   }
-}
-
-async function handleCloudSync() {
-  try {
-    const settings = await storage.getSettings();
-    if (settings.syncEnabled) {
-      await pull();
-    }
-  } catch (_) {}
 }
 
 async function handleCommand(command) {
@@ -550,29 +532,10 @@ async function handleSaveAllOnboarding(payload, sendResponse) {
 }
 
 // Check for crash on startup (runs only once per SW activation)
-// ---- Auto-Sync Setup ----
-
-// Register post-save hook: auto-sync to cloud when tabs are saved
-storage.onTabSaved(async ({ added }) => {
-  if (added <= 0) return;
-  try {
-    const settings = await storage.getSettings();
-    if (settings.syncEnabled) {
-      // Fire-and-forget: don't block the save operation on sync
-      fullSync().catch(() => {});
-    }
-  } catch (_) {
-    // Silently handle — don't let sync errors affect save
-  }
-});
-
 // ---- Startup ----
 
 (async function initialize() {
   try {
-    // Restore Supabase session (if previously logged in)
-    await restoreSession();
-
     // Check for crash
     const crashed = await storage.wasCrashed();
     if (crashed) {

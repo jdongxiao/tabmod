@@ -1,13 +1,12 @@
 {
   "extDescription": {
-    "message": "TabMod is a fast tab manager & session saver: one-click save, instant search, workspaces, cross-device sync. OneTab alternative.",
+    "message": "Fast, private tab manager: one-click save, instant search, workspaces, export. Offline, no account. Lightweight OneTab alternative.",
     "description": "Extension description shown in Chrome Web Store and chrome://extensions"
   },
   "extName": {
-    "message": "TabMod",
+    "message": "TabMod — OneTab Alternative & Tab Manager",
     "description": "Extension name"
   },
-
   "cmdSaveAll": {
     "message": "Save all tabs",
     "description": "Keyboard shortcut: save all open tabs"
@@ -20,7 +19,6 @@
     "message": "Open TabMod popup",
     "description": "Keyboard shortcut: open the extension popup"
   },
-
   "contextSaveCurrent": {
     "message": "Save this tab to TabMod",
     "description": "Right-click menu: save the current page as a tab"
@@ -33,7 +31,6 @@
     "message": "Save tabs to the right",
     "description": "Right-click menu: save all tabs to the right of the current one"
   },
-
   "popupTitle": {
     "message": "TabMod",
     "description": "Popup window header title"
@@ -74,7 +71,6 @@
     "message": "Close",
     "description": "Close dialog button"
   },
-
   "tabSaved_one": {
     "message": "1 tab saved",
     "description": "Singular: notification after saving one tab"
@@ -111,7 +107,6 @@
     "message": "Restored $1 tabs",
     "description": "Notification when batch restore completes"
   },
-
   "workspaceAll": {
     "message": "All",
     "description": "Tab label showing all workspaces combined"
@@ -144,7 +139,6 @@
     "message": "$1 tabs",
     "description": "Label showing tab count in a workspace"
   },
-
   "langChanged": {
     "message": "Language changed. Close and reopen the popup.",
     "description": "Toast shown when language is changed"
@@ -185,7 +179,6 @@
     "message": "Every 30 minutes",
     "description": "Auto-save interval option"
   },
-
   "settingsTitle": {
     "message": "Settings",
     "description": "Settings panel title"
@@ -246,10 +239,6 @@
     "message": "This will permanently delete all saved tabs and workspaces. This action cannot be undone.",
     "description": "Confirmation dialog when clearing all data"
   },
-  "settingsPro": {
-    "message": "Upgrade to Pro",
-    "description": "Button or section for Pro upgrade"
-  },
   "settingsAbout": {
     "message": "About",
     "description": "Settings section: about the extension"
@@ -266,7 +255,6 @@
     "message": "Privacy policy",
     "description": "Link to privacy policy"
   },
-
   "statsTitle": {
     "message": "Statistics",
     "description": "Statistics panel title"
@@ -283,7 +271,6 @@
     "message": "Memory saved",
     "description": "Statistic: estimated memory saved"
   },
-
   "exportTitle": {
     "message": "Export",
     "description": "Export panel title"
@@ -292,80 +279,6 @@
     "message": "Format",
     "description": "Label for export format selection"
   },
-
-  "proUpgradeTitle": {
-    "message": "Upgrade to Pro",
-    "description": "Upgrade page title"
-  },
-  "proFeatureSync": {
-    "message": "Cloud sync across devices",
-    "description": "Pro feature: cross-device synchronization"
-  },
-  "proFeatureUnlimited": {
-    "message": "Unlimited tab lists and workspaces",
-    "description": "Pro feature: no storage limits"
-  },
-  "proFeatureSnooze": {
-    "message": "Tab snoozing to save memory",
-    "description": "Pro feature: tab suspension"
-  },
-  "proFeatureAI": {
-    "message": "AI auto-classification",
-    "description": "Pro feature: automatic tab categorization"
-  },
-  "proFeatureShortcuts": {
-    "message": "Custom keyboard shortcuts",
-    "description": "Pro feature: customizable hotkeys"
-  },
-  "proFeaturePriority": {
-    "message": "Priority email support",
-    "description": "Pro feature: faster support responses"
-  },
-  "proPriceMonthly": {
-    "message": "$3.99/month",
-    "description": "Pro monthly subscription price"
-  },
-  "proPriceYearly": {
-    "message": "$29.99/year",
-    "description": "Pro yearly subscription price"
-  },
-  "proPriceLifetime": {
-    "message": "$79.99 lifetime",
-    "description": "Pro lifetime purchase price"
-  },
-  "proSavings": {
-    "message": "Save 37%",
-    "description": "Savings badge for yearly plan"
-  },
-  "proUpgradeNow": {
-    "message": "Upgrade Now",
-    "description": "Upgrade CTA button"
-  },
-  "proLater": {
-    "message": "Maybe later",
-    "description": "Dismiss upgrade prompt"
-  },
-  "proLicensePlaceholder": {
-    "message": "Enter License Key…",
-    "description": "License key input placeholder"
-  },
-  "proActivate": {
-    "message": "Activate",
-    "description": "Activate license button"
-  },
-  "proAlreadyHave": {
-    "message": "Already have a License Key? Activate →",
-    "description": "Link to enter an existing license key"
-  },
-  "proTabsLimit": {
-    "message": "You've used $1 of $2 tab lists. Upgrade to Pro for unlimited storage.",
-    "description": "Upgrade prompt when approaching the free limit"
-  },
-  "proTabsLimitReached": {
-    "message": "You've reached the free limit of $1 tab lists. Upgrade to Pro to continue saving.",
-    "description": "Upgrade prompt when free limit is reached"
-  },
-
   "errorGeneric": {
     "message": "Something went wrong. Please try again.",
     "description": "Generic error message"
@@ -378,22 +291,9 @@
     "message": "Storage is nearly full. Please export and clear old data.",
     "description": "Error when chrome.storage is near capacity"
   },
-  "errorSyncFailed": {
-    "message": "Sync failed. Will retry automatically.",
-    "description": "Error when cloud sync fails"
-  },
   "errorNetwork": {
     "message": "Network unavailable. Changes saved locally.",
     "description": "Error when network is offline during sync"
-
-  },
-  "statusSyncing": {
-    "message": "Syncing…",
-    "description": "Status indicator during sync"
-  },
-  "statusSyncSuccess": {
-    "message": "Synced",
-    "description": "Status indicator when sync completed"
   },
   "statusSaving": {
     "message": "Saving…",
@@ -403,7 +303,6 @@
     "message": "Loading…",
     "description": "Status indicator while loading data"
   },
-
   "crashRecoveryTitle": {
     "message": "Crash Recovery",
     "description": "Title for crash recovery notification"
@@ -416,7 +315,6 @@
     "message": "Recovered ($1)",
     "description": "Auto-created workspace name after crash recovery"
   },
-
   "onboardingWelcome": {
     "message": "Welcome to TabMod",
     "description": "Onboarding step 1: welcome title"
@@ -465,7 +363,6 @@
     "message": "Skip tutorial",
     "description": "Skip onboarding button"
   },
-
   "reviewBannerTitle": {
     "message": "Enjoying TabMod? A rating helps us a lot ▸",
     "description": "Non-modal review prompt banner text"
